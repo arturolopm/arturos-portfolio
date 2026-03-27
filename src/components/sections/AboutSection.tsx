@@ -91,7 +91,7 @@ export default function AboutSection() {
             </h3>
             
             <p className="text-lg text-white/70 mb-8 leading-relaxed">
-              With 4+ years of experience, I specialize in building scalable web 
+              With 5+ years of experience, I specialize in building scalable web 
               applications using React, Next.js, and TypeScript. I've delivered 
               high-impact projects at Globant for clients like NFL Plus and Ernst & Young, 
               achieving significant performance improvements and maintaining high code 
