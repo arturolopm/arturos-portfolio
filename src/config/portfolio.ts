@@ -1,16 +1,20 @@
 // Portfolio Configuration File
-// Edit this file to customize your portfolio content
+// Single source of truth for portfolio content. The sections import from here,
+// so edit this file rather than the components.
 
 export const personalInfo = {
   name: 'Arturo Lopez',
-  title: 'Senior Frontend Web Developer',
-  tagline: 'Building scalable web applications with React & Next.js',
+  title: 'Senior Software Engineer',
+  role: 'Senior Full Stack Engineer (Frontend-Focused)',
+  tagline: 'I build AI-powered, multi-tenant SaaS products end to end',
   description:
-    "Full Stack Web Developer (Frontend oriented) with 4+ years of experience specializing in React, Next.js, JavaScript, Node and TypeScript. Proven expertise in building scalable web applications, optimizing performance, and implementing best practices in unit testing, accessibility and AI assisted development.",
+    'Senior full stack engineer (frontend-focused) with 5+ years building scalable, multi-tenant SaaS platforms and AI-powered products. I lead products end to end — scoping with stakeholders, architecting the solution, and driving delivery — in React, Next.js, TypeScript and Node.js, with hands-on experience integrating LLM agents into production.',
   location: 'Medellin, Colombia',
+  availability: 'Open to remote roles worldwide',
   email: 'carturolopezm@gmail.com',
-  phone: '+57 3013866300',
-  resumeUrl: 'https://drive.google.com/file/d/1CUEmCnDOpBAjZ-OxTlj9e1mJm_7TVlkN/view?usp=sharing',
+  phone: '+57 301 386 6300',
+  resumeUrl:
+    'https://drive.google.com/file/d/1CUEmCnDOpBAjZ-OxTlj9e1mJm_7TVlkN/view?usp=sharing',
   social: {
     github: 'https://github.com/arturolopm',
     linkedin: 'https://www.linkedin.com/in/arturo-lopezm/',
@@ -19,225 +23,290 @@ export const personalInfo = {
 
 export const about = {
   title: 'About me',
-  subtitle: 'Full Stack Web Developer (Frontend Oriented)',
+  subtitle: 'Senior Full Stack Engineer (Frontend-Focused)',
   description:
-    "With 4+ years of experience, I specialize in building scalable web applications using React, Next.js, and TypeScript. I've delivered high-impact projects at Globant for clients like NFL Plus and Ernst & Young, achieving significant performance improvements and maintaining high code quality standards. My expertise spans from frontend optimization to full-stack development, with a strong focus on user-centered solutions and best practices.",
-  yearsOfExperience: '4+',
+    "Over 5+ years I've gone from building MVPs from scratch to owning the entire frontend of a company's flagship AI product. At Xertify I architected a multi-tenant conversational assistant on Next.js 16 — SSE-streamed chat across Anthropic Claude, Google ADK agents and Gemini, granular per-tenant RBAC, and a dual-token auth flow — and shipped it to enterprise and education clients. Before that, at Globant, I drove frontend architecture for NFL+ and Ernst & Young. I care most about owning the whole problem: scoping it with stakeholders, deciding the architecture, and leaving standards behind that outlast me.",
+  yearsOfExperience: '5+',
   education: {
-    degree: 'Business Management',
+    degree: 'Bachelor of Business Management',
     institution: 'Universidad Nacional de Colombia',
     year: '2019',
   },
   languages: [
-    { name: 'English', level: 'Advanced (C1)' },
     { name: 'Spanish', level: 'Native (C2)' },
+    { name: 'English', level: 'Advanced (C1)' },
   ],
   technologies: [
     'React',
-    'Next.js',
+    'Next.js 16',
     'TypeScript',
-    'JavaScript',
     'Node.js',
-    'Redux',
     'Zustand',
-    'Tailwind CSS',
+    'React Query',
+    'Zod',
+    'MySQL',
+    'PostgreSQL',
+    'Docker',
+    'AWS',
+    'Anthropic Claude',
+    'Playwright',
+    'Vitest',
   ],
 };
 
 export const skills = {
   title: 'Skills & Expertise',
   description:
-    'Frontend-oriented Full Stack Developer with 4+ years of experience specializing in React, Next.js, and TypeScript. Proven track record of delivering scalable web applications with focus on performance optimization, accessibility, and best practices.',
+    'Senior engineer with deep React/Next.js architecture experience and hands-on production work integrating LLMs and agent frameworks into real products.',
   categories: [
     {
-      name: 'Frontend Development',
-      items: ['React', 'Next.js 15', 'TypeScript', 'JavaScript', 'Redux', 'Zustand'],
+      name: 'Frontend & Architecture',
+      items: [
+        'React',
+        'Next.js 16 (App Router)',
+        'TypeScript',
+        'Zustand',
+        'TanStack React Query',
+        'React Hook Form + Zod',
+      ],
     },
     {
-      name: 'Styling & UI',
-      items: ['HTML5', 'CSS3', 'Tailwind CSS', 'Storybook', 'Responsive Design'],
+      name: 'AI & Real-Time',
+      items: [
+        'Anthropic Claude',
+        'Google ADK Agents',
+        'Gemini',
+        'LLM / Agent Integration',
+        'SSE Streaming',
+        'WebSockets',
+      ],
     },
     {
-      name: 'Backend & APIs',
-      items: ['Node.js', 'RESTful APIs', 'OAuth', 'WebSockets', 'MERN Stack'],
+      name: 'Backend & Data',
+      items: ['Node.js', 'MySQL', 'PostgreSQL', 'REST APIs', 'Repository Pattern', 'Firebase'],
     },
     {
-      name: 'Tools & Testing',
-      items: ['Git/GitHub', 'Vitest', 'Jest', 'Performance Optimization', 'SEO'],
+      name: 'Platform & Security',
+      items: [
+        'Multi-tenant SaaS',
+        'Granular RBAC',
+        'JWT + OAuth',
+        'Google / Microsoft SSO',
+        'Docker',
+        'AWS (ECR, SQS)',
+      ],
+    },
+    {
+      name: 'Quality & Testing',
+      items: [
+        'Vitest',
+        'Jest',
+        'Playwright',
+        'Storybook',
+        'GitHub Actions CI/CD',
+        'Accessibility & SEO',
+      ],
+    },
+    {
+      name: 'Performance',
+      items: [
+        'SSR',
+        'Dynamic Imports',
+        'Lazy Loading',
+        'Memoization Strategy',
+        'Core Web Vitals',
+        'Claude Code',
+      ],
     },
   ],
-  stats: {
-    experience: '4+',
-    expertise: 'React',
-    focus: 'Frontend',
-  },
+  // Verified numbers only. Each maps to a specific role.
+  metrics: [
+    { value: '5+', label: 'Years shipping production software' },
+    { value: '57%', label: 'Time to Interactive gain on NFL+' },
+    { value: '85%', label: 'Unit test coverage at Ernst & Young' },
+    { value: '30%', label: 'Faster PR reviews via Claude in CI' },
+  ],
   highlights: [
-    '57% improvement in Time to Interactive (TTI)',
-    '85% unit test coverage achieved',
-    '100% documentation rate for UI components',
+    '57% improvement in Time to Interactive (NFL+)',
+    '85% unit test coverage, 35% personally authored (Ernst & Young)',
+    '30% faster code review via Claude-based automation in CI/CD',
+    '100% Storybook coverage of new UI components',
   ],
-  // Spline 3D scene URL - using an interactive robot scene with spotlight
-  splineSceneUrl: 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode',
 };
 
 export const services = [
   {
-    title: 'Frontend Development',
+    title: 'End-to-End Product Ownership',
     description:
-      'Building scalable web applications with React, Next.js 15, and TypeScript. Expertise in performance optimization, achieving 57% improvement in TTI through lazy loading, SSR, and dynamic imports.',
-    icon: 'Code',
-    links: ['React', 'Next.js', 'TypeScript'],
+      "I take products from stakeholder scoping through architecture to delivery. At Xertify I owned the entire frontend of the company's flagship AI product, negotiating scope, timelines and information architecture directly with enterprise and education clients.",
+    icon: 'Compass',
+    links: ['Architecture', 'Scoping', 'Delivery'],
   },
   {
-    title: 'Performance Optimization',
+    title: 'AI Product Engineering',
     description:
-      'Implementing best practices for web performance including lazy loading, Server-Side Rendering, memoization, and code splitting. Proven track record of significant performance improvements.',
-    icon: 'Zap',
-    links: ['Optimization', 'SSR', 'Performance'],
+      'Hands-on production integration of LLMs and agent frameworks into product surfaces: SSE-streamed chat UIs, conversation history and resume-context handling across Anthropic Claude, Google ADK agents and Gemini. Integration and product work, not model training.',
+    icon: 'Sparkles',
+    links: ['Claude', 'Google ADK', 'SSE Streaming'],
   },
   {
-    title: 'Testing & Quality',
+    title: 'Multi-Tenant SaaS Architecture',
     description:
-      'Maintaining high code quality with comprehensive unit testing using Vitest and Jest. Achieved 85% test coverage and 100% documentation rate using Storybook for UI components.',
-    icon: 'CheckCircle',
-    links: ['Testing', 'Vitest', 'Storybook'],
+      'Subdomain-based tenant routing and isolation, a shared component system serving distinct tenant experiences from one codebase, granular per-tenant RBAC, and dual-token authentication over a repository-pattern data layer.',
+    icon: 'Layers',
+    links: ['Multi-tenancy', 'RBAC', 'Auth'],
   },
   {
-    title: 'Mentorship & Leadership',
+    title: 'Performance & Quality Standards',
     description:
-      'Mentoring junior developers on best practices, code quality standards, and performance optimization. Leading code reviews and enforcing architectural patterns across teams.',
-    icon: 'Users',
-    links: ['Leadership', 'Mentoring', 'Code Review'],
+      'Measurable performance work — a 57% Time to Interactive improvement on NFL+ through SSR, dynamic imports, lazy loading and memoization — plus the testing and documentation standards that keep gains from eroding.',
+    icon: 'Gauge',
+    links: ['Core Web Vitals', 'Vitest', 'Playwright'],
   },
 ];
 
 export const projects = [
   {
-    title: 'NFL Plus Platform',
+    title: 'Xertiflow AI Assistant',
     description:
-      'Senior Frontend Developer at Globant working on NFL Plus web applications using Next.js 15. Achieved 57% improvement in Time to Interactive through performance optimization and SSR implementation.',
-    category: 'Enterprise',
-    company: 'Globant',
-    period: 'May 2025 - Present',
-    image: '/projects/nfl.jpg',
+      "Led the end-to-end build of Xertify's flagship AI product: a conversational assistant for case management and student/customer service-request intake, delivered to enterprise and education clients. Built on Next.js 16 with an SSE-streamed chat UI, conversation history and resume-context handling across Anthropic Claude, Google ADK agents and Gemini. Architected the multi-tenant frontend with subdomain tenant isolation, granular per-tenant RBAC, and dual-token auth (Firebase + custom JWT) over a repository-pattern MySQL layer.",
+    category: 'Senior Full Stack Engineer',
+    company: 'Xertify',
+    period: 'Feb 2026 - Present',
+    logo: null,
     liveUrl: null,
     githubUrl: null,
-    tags: ['Next.js 15', 'React', 'Performance', 'SSR', 'TypeScript'],
+    tags: [
+      'Next.js 16',
+      'Anthropic Claude',
+      'Google ADK',
+      'Gemini',
+      'SSE Streaming',
+      'Multi-tenant',
+      'RBAC',
+      'Docker',
+    ],
   },
   {
-    title: 'Ernst & Young Regression Analysis Tool',
+    title: 'NFL Plus',
     description:
-      'Refactored large-scale components prioritizing performance and accessibility. Achieved 85% unit test coverage using Vitest and coordinated global deployment from Germany-based to worldwide release.',
-    category: 'Enterprise',
+      'Drove frontend architecture and technical decisions for the NFL+ streaming platform on Next.js 15, defining patterns and standards adopted across the team. Led a performance initiative that improved Time to Interactive by 57% through SSR, dynamic imports, lazy loading and memoization strategy. Collaborated on integrating Claude-based automated code review into the CI/CD pipeline, cutting review turnaround by 30%. Established Storybook documentation and testing standards with 100% coverage of new UI components, and mentored engineers on architecture and performance.',
+    category: 'Senior Frontend Engineer',
     company: 'Globant',
-    period: 'Jan 2024 - Apr 2025',
-    image: '/projects/ey.jpg',
+    period: 'May 2025 - Dec 2025',
+    logo: '/logos/nfl-logo.svg',
     liveUrl: null,
     githubUrl: null,
-    tags: ['React', 'TypeScript', 'Vitest', 'Accessibility', 'Testing'],
+    tags: ['Next.js 15', 'React', 'Performance', 'SSR', 'Storybook', 'Claude in CI'],
+  },
+  {
+    title: 'Ernst & Young',
+    description:
+      'Led refactoring of large-scale components in a regression-analysis platform (React, TypeScript), prioritizing performance and accessibility. Drove the tool from a regional Germany-based deployment to global release inside a federated development environment. Achieved 85% unit test coverage with Vitest, personally owning 35% of the suite, and oversaw integration of third-party and external-team components.',
+    category: 'Semi-Senior Advanced Frontend Engineer',
+    company: 'Globant',
+    period: 'Jan 2024 - Apr 2025',
+    logo: '/logos/ey-logo.svg',
+    liveUrl: null,
+    githubUrl: null,
+    tags: ['React', 'TypeScript', 'Vitest', 'Accessibility', 'Federated Apps'],
   },
   {
     title: 'Studio5 E-Commerce',
     description:
-      'Led end-to-end development of e-commerce platform using MERN stack with comprehensive unit testing. Integrated payment processors, optimized performance and SEO positioning.',
-    category: 'Full Stack',
+      'Led end-to-end development of an e-commerce platform on the MERN stack with payment integrations, performance and SEO optimization, and full unit-test coverage.',
+    category: 'Full Stack Developer',
     company: 'Studio5',
-    period: 'May 2023 - Nov 2023',
-    image: '/projects/studio5.jpg',
+    period: '2023',
+    logo: null,
     liveUrl: 'https://studiocincomaquillaje.com/',
     githubUrl: null,
-    tags: ['MERN', 'TypeScript', 'E-commerce', 'SEO', 'Testing'],
-  },
-  {
-    title: 'Myjou Social Platform',
-    description:
-      'Built MVP core structure from scratch with OAuth authentication and WebSockets for real-time features. Social platform for goal tracking and peer feedback.',
-    category: 'Full Stack',
-    company: 'Myjou',
-    period: 'Mar 2023 - May 2023',
-    image: '/projects/myjou.jpg',
-    liveUrl: 'https://myjou.tech/',
-    githubUrl: null,
-    tags: ['MERN', 'OAuth', 'WebSockets', 'Real-time'],
+    tags: ['MERN', 'E-commerce', 'SEO', 'Testing'],
   },
   {
     title: 'Sunquwan E-Commerce',
     description:
-      'Developed comprehensive e-commerce application with secure payment integration (PayPal, MercadoPago). Improved SEO positioning through semantic HTML implementation.',
-    category: 'Full Stack',
+      'Built a full e-commerce application from scratch with secure payment integration (PayPal, MercadoPago) and improved SEO positioning through semantic HTML.',
+    category: 'Full Stack Developer',
     company: 'Sunquwan',
-    period: 'Nov 2022 - Mar 2023',
-    image: '/projects/sunquwan.jpg',
+    period: '2022 - 2023',
+    logo: null,
     liveUrl: 'https://www.sunquwan.com/',
     githubUrl: 'https://github.com/arturolopm/ReactEcommerce',
     tags: ['React', 'PayPal', 'MercadoPago', 'SEO'],
+  },
+  {
+    title: 'Myjou Social Platform',
+    description:
+      'Built the MVP core structure from scratch with OAuth authentication and WebSockets for real-time features — a social platform for goal tracking and peer feedback.',
+    category: 'Full Stack Developer',
+    company: 'Myjou',
+    period: '2023',
+    logo: null,
+    liveUrl: 'https://myjou.tech/',
+    githubUrl: null,
+    tags: ['MERN', 'OAuth', 'WebSockets', 'Real-time'],
   },
 ];
 
 export const contact = {
   title: 'Get in touch',
-  heading: "Let's work together!",
+  heading: "Let's build something",
   description:
-    "Interested in collaborating on a project or discussing opportunities? I'm always open to new challenges in frontend development, performance optimization, and building scalable web applications.",
+    "I'm open to senior frontend and full stack roles, remote worldwide, especially where AI is part of the product. If you're hiring or want to talk architecture, my inbox is open.",
 };
 
 export const experience = [
   {
-    company: 'Globant',
-    position: 'Senior Frontend Web Developer',
-    project: 'NFL Plus',
+    company: 'Xertify',
+    position: 'Senior Full Stack (Frontend Oriented) Software Engineer',
+    project: 'Xertiflow',
     location: 'Medellin, Colombia',
-    period: 'May 2025 - Present',
+    period: 'February 2026 - Present',
     highlights: [
-      'Developing and maintaining web applications for NFL Plus platform using Next.js 15',
-      'Achieved 57% improvement in Time to Interactive (TTI) through optimization',
-      'Maintained 100% documentation rate for UI components using Storybook',
-      'Mentored junior developers on best practices and performance optimization',
+      "Led the end-to-end build of the company's flagship AI product, owning all frontend codebase decisions",
+      'Built an SSE-streamed chat UI across Anthropic Claude, Google ADK agents and Gemini on Next.js 16',
+      'Architected multi-tenant frontend with subdomain isolation, per-tenant RBAC and dual-token auth',
+      "Established Vitest/Playwright coverage as the team's testing standard",
+      'Shipped multi-stage Docker builds to Amazon ECR via GitHub Actions CI/CD',
     ],
   },
   {
     company: 'Globant',
-    position: 'Ssr Advanced Frontend Web Developer',
+    position: 'Senior Frontend Software Engineer',
+    project: 'NFL Plus',
+    location: 'Medellin, Colombia',
+    period: 'May 2025 - December 2025',
+    highlights: [
+      'Drove frontend architecture for the NFL+ streaming platform on Next.js 15',
+      'Improved Time to Interactive by 57% through SSR, dynamic imports, lazy loading and memoization',
+      'Cut PR review turnaround 30% by integrating Claude-based automated review into CI/CD',
+      'Maintained 100% Storybook documentation coverage for new UI components',
+      'Mentored engineers on architecture, performance and code quality',
+    ],
+  },
+  {
+    company: 'Globant',
+    position: 'Semi-Senior Advanced Frontend Engineer',
     project: 'Ernst & Young',
     location: 'Medellin, Colombia',
     period: 'January 2024 - April 2025',
     highlights: [
       'Refactored large-scale components prioritizing performance and accessibility',
-      'Achieved 85% unit test coverage using Vitest',
-      'Coordinated global deployment from Germany to worldwide release',
-      'Integrated application into federated development environment',
+      'Achieved 85% unit test coverage with Vitest, personally owning 35% of the suite',
+      'Drove the tool from Germany-based regional deployment to global release',
+      'Integrated the application into a federated development environment',
     ],
   },
   {
-    company: 'Studio5',
+    company: 'Studio5 / Freelance',
     position: 'Full Stack Web Developer',
-    location: 'Bogotá, Colombia',
-    period: 'May 2023 - November 2023',
+    location: 'Bogota, Colombia',
+    period: 'January 2021 - November 2023',
     highlights: [
-      'Led end-to-end development of e-commerce platform using MERN stack',
-      'Integrated payment processors and optimized performance',
-      'Mentored junior developers and increased test coverage',
-    ],
-  },
-  {
-    company: 'Myjou',
-    position: 'Full Stack Web Developer',
-    location: 'Bogotá, Colombia',
-    period: 'March 2023 - May 2023',
-    highlights: [
-      'Built MVP core structure with OAuth authentication',
-      'Implemented WebSockets for real-time features',
-    ],
-  },
-  {
-    company: 'Sunquwan',
-    position: 'Full Stack Web Developer',
-    location: 'Bogotá, Colombia',
-    period: 'November 2022 - March 2023',
-    highlights: [
-      'Developed e-commerce with secure payment integration',
-      'Improved SEO through semantic HTML implementation',
+      'Led development of a MERN e-commerce platform with payment integrations and full test coverage',
+      'Built MVPs from scratch for Myjou and Sunquwan: OAuth, WebSockets, PayPal and MercadoPago',
+      'Optimized performance and SEO positioning across client projects',
     ],
   },
 ];
-

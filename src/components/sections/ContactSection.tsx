@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
+import { contact, personalInfo } from '@/config/portfolio';
 
 export default function ContactSection() {
   const [ref, inView] = useInView({
@@ -21,156 +21,164 @@ export default function ContactSection() {
     message: '',
   });
 
+  // This is a static site with no backend, so the form hands off to the
+  // visitor's mail client with everything pre-filled. The button label says so.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // You can integrate with an email service or API here
+    const subject = `Portfolio enquiry from ${formData.name}`;
+    const body = `${formData.message}\n\n---\n${formData.name}\n${formData.email}`;
+    window.location.href = `mailto:${personalInfo.email}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const fieldClass =
+    'rounded-none border-0 border-b border-line bg-transparent px-0 py-4 text-paper placeholder:text-faint focus-visible:border-signal focus-visible:ring-0 transition-colors';
 
   return (
-    <section id="contact" className="py-20 lg:py-32">
-      <div className="container mx-auto px-4">
+    <section
+      id='contact'
+      className='py-20 lg:py-28'
+    >
+      <div className='container mx-auto px-4'>
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto"
+          transition={{ duration: 0.5 }}
+          className='grid gap-12 border-t border-line pt-12 lg:grid-cols-12 lg:gap-16'
         >
-          <div className="text-center mb-12">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={inView ? { scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-block p-4 bg-gradient-accent rounded-full mb-6"
-            >
-              <Mail className="w-8 h-8 text-purple-400" />
-            </motion.div>
-            
-            <h4 className="text-xl uppercase text-gradient font-medium mb-4 tracking-wide">
-              Get in touch
-            </h4>
-            
-            <h2 className="text-4xl lg:text-6xl font-bold mb-6">
-              Let's work <span className="text-gradient">together!</span>
-            </h2>
-            
-            <p className="text-lg text-white/70 max-w-2xl mx-auto">
-              Have a project in mind? Let's discuss how we can work together to 
-              bring your ideas to life.
+          <div className='lg:col-span-5'>
+            <p className='eyebrow mb-6'>05 / Contact</p>
+            <h2 className='mb-5 text-3xl font-bold md:text-4xl'>{contact.heading}</h2>
+            <p className='mb-10 max-w-md text-base leading-relaxed text-dim'>
+              {contact.description}
             </p>
+
+            <dl className='space-y-5'>
+              <div className='border-t border-line pt-4'>
+                <dt className='eyebrow-dim mb-2'>Email</dt>
+                <dd>
+                  <a
+                    href={`mailto:${personalInfo.email}`}
+                    className='readout text-sm text-paper transition-colors hover:text-signal'
+                  >
+                    {personalInfo.email}
+                  </a>
+                </dd>
+              </div>
+              <div className='border-t border-line pt-4'>
+                <dt className='eyebrow-dim mb-2'>Elsewhere</dt>
+                <dd className='flex gap-5'>
+                  <a
+                    href={personalInfo.social.linkedin}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='readout text-sm text-paper transition-colors hover:text-signal'
+                  >
+                    LinkedIn
+                  </a>
+                  <a
+                    href={personalInfo.social.github}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='readout text-sm text-paper transition-colors hover:text-signal'
+                  >
+                    GitHub
+                  </a>
+                </dd>
+              </div>
+              <div className='border-t border-line pt-4'>
+                <dt className='eyebrow-dim mb-2'>Location</dt>
+                <dd className='text-sm text-paper'>{personalInfo.location}</dd>
+                <dd className='mt-1 text-sm text-faint'>{personalInfo.availability}</dd>
+              </div>
+            </dl>
           </div>
 
-          <Card className="glass-effect border-2 border-white/10">
-            <CardContent className="p-8 lg:p-12">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <motion.div
-                  initial={{ x: -30, opacity: 0 }}
-                  animate={inView ? { x: 0, opacity: 1 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 }}
+          <div className='lg:col-span-7'>
+            <form
+              onSubmit={handleSubmit}
+              className='flex flex-col gap-6'
+            >
+              <div>
+                <label
+                  htmlFor='contact-name'
+                  className='eyebrow-dim'
                 >
-                  <Input
-                    type="text"
-                    name="name"
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="bg-transparent border-b border-white/20 rounded-none px-0 py-4 text-white placeholder:text-white/50 focus-visible:border-purple-500 transition-colors"
-                  />
-                </motion.div>
+                  Your name
+                </label>
+                <Input
+                  id='contact-name'
+                  type='text'
+                  name='name'
+                  placeholder='Jane Doe'
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className={fieldClass}
+                />
+              </div>
 
-                <motion.div
-                  initial={{ x: -30, opacity: 0 }}
-                  animate={inView ? { x: 0, opacity: 1 } : {}}
-                  transition={{ duration: 0.5, delay: 0.4 }}
+              <div>
+                <label
+                  htmlFor='contact-email'
+                  className='eyebrow-dim'
                 >
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Your email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="bg-transparent border-b border-white/20 rounded-none px-0 py-4 text-white placeholder:text-white/50 focus-visible:border-purple-500 transition-colors"
-                  />
-                </motion.div>
+                  Your email
+                </label>
+                <Input
+                  id='contact-email'
+                  type='email'
+                  name='email'
+                  placeholder='jane@company.com'
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className={fieldClass}
+                />
+              </div>
 
-                <motion.div
-                  initial={{ x: -30, opacity: 0 }}
-                  animate={inView ? { x: 0, opacity: 1 } : {}}
-                  transition={{ duration: 0.5, delay: 0.5 }}
+              <div>
+                <label
+                  htmlFor='contact-message'
+                  className='eyebrow-dim'
                 >
-                  <Textarea
-                    name="message"
-                    placeholder="Your message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={6}
-                    className="bg-transparent border-b border-white/20 rounded-none px-0 py-4 text-white placeholder:text-white/50 focus-visible:border-purple-500 transition-colors resize-none"
-                  />
-                </motion.div>
+                  Message
+                </label>
+                <Textarea
+                  id='contact-message'
+                  name='message'
+                  placeholder='What are you building?'
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={6}
+                  className={`${fieldClass} resize-none`}
+                />
+              </div>
 
-                <motion.div
-                  initial={{ y: 30, opacity: 0 }}
-                  animate={inView ? { y: 0, opacity: 1 } : {}}
-                  transition={{ duration: 0.5, delay: 0.6 }}
+              <div className='flex flex-wrap items-center gap-4'>
+                <Button
+                  type='submit'
+                  size='lg'
+                  className='rounded-sm bg-signal font-medium text-[#17130c] hover:bg-[#f0b25c]'
                 >
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
-                  >
-                    <Send className="w-4 h-4 mr-2" />
-                    Send Message
-                  </Button>
-                </motion.div>
-              </form>
-            </CardContent>
-          </Card>
-
-          {/* Additional Contact Info */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.7 }}
-            className="mt-12 text-center"
-          >
-            <p className="text-white/60 mb-4">Or reach out directly:</p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="https://github.com/arturolopm"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gradient hover:scale-105 transition-transform"
-              >
-                GitHub
-              </a>
-              <span className="text-white/30">•</span>
-              <a
-                href="https://www.linkedin.com/in/arturo-lopez-martinez/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gradient hover:scale-105 transition-transform"
-              >
-                LinkedIn
-              </a>
-            </div>
-          </motion.div>
+                  <Send className='mr-2 h-4 w-4' />
+                  Open in mail app
+                </Button>
+                <p className='text-xs text-faint'>
+                  Opens your mail client with this message pre-filled.
+                </p>
+              </div>
+            </form>
+          </div>
         </motion.div>
       </div>
     </section>
   );
 }
-

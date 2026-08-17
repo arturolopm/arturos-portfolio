@@ -3,149 +3,120 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-
-const technologies = [
-  'React', 'Next.js 15', 'TypeScript', 'JavaScript', 
-  'Node.js', 'Redux', 'Zustand', 'Tailwind CSS',
-  'HTML5', 'CSS3', 'Vitest', 'Jest', 'Storybook'
-];
+import { about, personalInfo } from '@/config/portfolio';
 
 export default function AboutSection() {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.15,
   });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { x: -50, opacity: 0 },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 100,
-      },
-    },
-  };
-
   const scrollToWork = () => {
-    const element = document.getElementById('work');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section id="about" className="py-20 lg:py-32">
-      <div className="container mx-auto px-4">
+    <section
+      id='about'
+      className='py-20 lg:py-28'
+    >
+      <div className='container mx-auto px-4'>
         <motion.div
           ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className='grid gap-12 border-t border-line pt-12 lg:grid-cols-12 lg:gap-16'
         >
-          {/* Left Side - Image/Visual */}
-          <motion.div
-            variants={itemVariants}
-            className="relative"
-          >
-            <Card className="glass-effect p-8 lg:p-12 border-2 border-white/10">
-              <div className="aspect-square bg-gradient-accent rounded-2xl flex items-center justify-center">
-                <div className="text-center p-6">
-                  <div className="text-6xl lg:text-8xl font-bold text-gradient mb-4">
-                    4+
-                  </div>
-                  <div className="text-xl lg:text-2xl text-white/80 mb-6">
-                    Years of Experience
-                  </div>
-                  <div className="space-y-2 text-sm text-white/60">
-                    <div>🎓 Business Management</div>
-                    <div>Universidad Nacional de Colombia</div>
-                    <div className="mt-4">🌍 English (C1) • Spanish (C2)</div>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </motion.div>
+          {/* Left rail: the facts, as a spec sheet. */}
+          <div className='lg:col-span-4'>
+            <p className='eyebrow mb-8'>01 / About</p>
 
-          {/* Right Side - Content */}
-          <motion.div variants={itemVariants}>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gradient mb-6">
-              About me
-            </h2>
-            
-            <h3 className="text-2xl lg:text-3xl font-semibold text-white mb-6">
-              Full Stack Web Developer (Frontend Oriented)
-            </h3>
-            
-            <p className="text-lg text-white/70 mb-8 leading-relaxed">
-              With 4+ years of experience, I specialize in building scalable web 
-              applications using React, Next.js, and TypeScript. I've delivered 
-              high-impact projects at Globant for clients like NFL Plus and Ernst & Young, 
-              achieving significant performance improvements and maintaining high code 
-              quality standards. My expertise spans from frontend optimization to 
-              full-stack development, with a strong focus on user-centered solutions 
-              and best practices.
+            <dl className='space-y-6'>
+              <div>
+                <dt className='eyebrow-dim mb-2'>Experience</dt>
+                <dd className='readout text-4xl font-medium text-paper'>
+                  {about.yearsOfExperience}
+                  <span className='ml-2 font-sans text-sm font-normal text-faint'>years</span>
+                </dd>
+              </div>
+
+              <div className='border-t border-line pt-5'>
+                <dt className='eyebrow-dim mb-2'>Education</dt>
+                <dd className='text-sm text-paper'>{about.education.degree}</dd>
+                <dd className='mt-1 text-sm text-faint'>
+                  {about.education.institution}, {about.education.year}
+                </dd>
+              </div>
+
+              <div className='border-t border-line pt-5'>
+                <dt className='eyebrow-dim mb-2'>Languages</dt>
+                {about.languages.map((lang) => (
+                  <dd
+                    key={lang.name}
+                    className='flex justify-between text-sm text-paper'
+                  >
+                    <span>{lang.name}</span>
+                    <span className='readout text-faint'>{lang.level}</span>
+                  </dd>
+                ))}
+              </div>
+
+              <div className='border-t border-line pt-5'>
+                <dt className='eyebrow-dim mb-2'>Based in</dt>
+                <dd className='text-sm text-paper'>{personalInfo.location}</dd>
+                <dd className='mt-1 text-sm text-faint'>{personalInfo.availability}</dd>
+              </div>
+            </dl>
+          </div>
+
+          {/* Right: the narrative. */}
+          <div className='lg:col-span-8'>
+            <h2 className='mb-6 text-3xl font-bold md:text-4xl'>{about.subtitle}</h2>
+
+            <p className='mb-10 max-w-2xl text-base leading-relaxed text-dim md:text-lg'>
+              {about.description}
             </p>
 
-            {/* Technology Stack */}
-            <div className="mb-8">
-              <h4 className="text-xl font-semibold text-white mb-4">
-                Technology Stack
-              </h4>
-              <div className="flex flex-wrap gap-3">
-                {technologies.map((tech, index) => (
-                  <motion.span
+            <div className='mb-10'>
+              <p className='eyebrow-dim mb-4'>Stack</p>
+              <div className='flex flex-wrap gap-x-5 gap-y-2'>
+                {about.technologies.map((tech) => (
+                  <span
                     key={tech}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={inView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: index * 0.1 }}
-                    className="px-4 py-2 glass-effect rounded-full text-sm text-white/80 hover:text-white hover:scale-105 transition-all"
+                    className='readout text-sm text-dim'
                   >
                     {tech}
-                  </motion.span>
+                  </span>
                 ))}
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4">
+            <div className='flex flex-wrap gap-3'>
               <a
-                href="https://drive.google.com/file/d/1CUEmCnDOpBAjZ-OxTlj9e1mJm_7TVlkN/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={personalInfo.resumeUrl}
+                target='_blank'
+                rel='noopener noreferrer'
               >
                 <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                  size='lg'
+                  className='rounded-sm bg-signal font-medium text-[#17130c] hover:bg-[#f0b25c]'
                 >
-                  Get My Resume
+                  Download CV
                 </Button>
               </a>
               <Button
                 onClick={scrollToWork}
-                variant="ghost"
-                size="lg"
-                className="text-gradient hover:bg-white/5"
+                variant='ghost'
+                size='lg'
+                className='rounded-sm text-paper hover:bg-raised hover:text-paper'
               >
-                My Portfolio
+                See the work
               </Button>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
   );
 }
-

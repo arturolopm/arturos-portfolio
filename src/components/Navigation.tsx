@@ -2,16 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Home, User, Briefcase, Code, Mail, Sparkles } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 const navItems = [
-  { id: 'home', icon: Home, label: 'Home' },
-  { id: 'about', icon: User, label: 'About' },
-  { id: 'skills', icon: Sparkles, label: 'Skills' },
-  { id: 'services', icon: Code, label: 'Services' },
-  { id: 'work', icon: Briefcase, label: 'Work' },
-  { id: 'contact', icon: Mail, label: 'Contact' },
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'services', label: 'What I do' },
+  { id: 'work', label: 'Work' },
+  { id: 'contact', label: 'Contact' },
 ];
 
 export default function Navigation() {
@@ -19,11 +17,9 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems.map(item => document.getElementById(item.id));
       const scrollPosition = window.scrollY + window.innerHeight / 2;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
+      for (let i = navItems.length - 1; i >= 0; i--) {
+        const section = document.getElementById(navItems[i].id);
         if (section && section.offsetTop <= scrollPosition) {
           setActiveSection(navItems[i].id);
           break;
@@ -31,55 +27,53 @@ export default function Navigation() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <motion.nav
-      initial={{ y: 100, opacity: 0 }}
+      initial={{ y: 60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, delay: 0.5 }}
-      className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-fit"
+      transition={{ duration: 0.4, delay: 0.4 }}
+      aria-label='Section navigation'
+      className='fixed bottom-5 left-1/2 z-50 w-fit -translate-x-1/2'
     >
-      <div className="glass-effect rounded-full px-6 py-4 shadow-2xl">
-        <div className="flex items-center gap-2 md:gap-4">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeSection === item.id;
-            
-            return (
-              <Button
-                key={item.id}
-                variant="ghost"
-                size="icon"
+      <ul className='panel-raised flex items-center gap-1 rounded-sm px-1.5 py-1.5 shadow-xl'>
+        {navItems.map((item) => {
+          const isActive = activeSection === item.id;
+          return (
+            <li key={item.id}>
+              <button
+                type='button'
                 onClick={() => scrollToSection(item.id)}
-                className={`relative transition-all duration-300 hover:scale-110 ${
-                  isActive ? 'text-purple-500' : 'text-white/70 hover:text-white'
+                aria-current={isActive ? 'true' : undefined}
+                className={`readout relative rounded-sm px-3 py-1.5 text-xs transition-colors ${
+                  isActive ? 'text-[#17130c]' : 'text-dim hover:text-paper'
                 }`}
-                title={item.label}
               >
-                <Icon className="w-5 h-5" />
+                {/* No negative z-index here: the nav panel paints its own
+                    background, so -z-10 would hide the pill behind it. DOM
+                    order plus `relative` on the label is enough. */}
                 {isActive && (
-                  <motion.div
-                    layoutId="activeIndicator"
-                    className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg -z-10"
+                  <motion.span
+                    layoutId='navActive'
+                    aria-hidden='true'
+                    className='absolute inset-0 rounded-sm bg-signal'
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
-              </Button>
-            );
-          })}
-        </div>
-      </div>
+                <span className='relative'>{item.label}</span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
     </motion.nav>
   );
 }
-
