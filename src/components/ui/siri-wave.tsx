@@ -204,6 +204,8 @@ export function SiriWave({
 }: SiriWaveProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [failed, setFailed] = useState(false);
+  // Bumped when the browser reports the context restored, to re-run setup.
+  const [generation, setGeneration] = useState(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -217,10 +219,25 @@ export function SiriWave({
       stencil: false,
     }) as WebGLRenderingContext | null;
 
-    if (!gl) {
+    if (!gl || gl.isContextLost()) {
+      // A canvas hands back the *same* context object on every getContext call,
+      // so once it is lost it stays lost. Show the fallback instead of trying to
+      // compile against a dead context (which fails with a null info log).
       setFailed(true);
       return;
     }
+
+    let raf = 0;
+
+    // Without preventDefault the browser will not attempt to restore.
+    const onLost = (e: Event) => {
+      e.preventDefault();
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+    };
+    const onRestored = () => setGeneration((g) => g + 1);
+    canvas.addEventListener('webglcontextlost', onLost);
+    canvas.addEventListener('webglcontextrestored', onRestored);
 
     const vs = compile(gl, gl.VERTEX_SHADER, VERT);
     const fs = compile(gl, gl.FRAGMENT_SHADER, variant === 'wave' ? FRAG_WAVE : FRAG_DOTS);
@@ -287,7 +304,6 @@ export function SiriWave({
       typeof window.matchMedia === 'function' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    let raf = 0;
     const start = performance.now();
 
     const draw = (now: number) => {
@@ -310,13 +326,20 @@ export function SiriWave({
     return () => {
       if (raf) cancelAnimationFrame(raf);
       observer.disconnect();
+      canvas.removeEventListener('webglcontextlost', onLost);
+      canvas.removeEventListener('webglcontextrestored', onRestored);
       gl.deleteBuffer(buffer);
       gl.deleteProgram(program);
       gl.deleteShader(vs);
       gl.deleteShader(fs);
-      gl.getExtension('WEBGL_lose_context')?.loseContext();
+      // Deliberately NOT calling WEBGL_lose_context.loseContext() here.
+      // A canvas returns the same context object from every getContext call, and
+      // a force-lost context never recovers. Under React StrictMode the dev-only
+      // mount -> unmount -> mount cycle would then re-enter setup holding a dead
+      // context: every compileShader fails and getShaderInfoLog returns null.
+      // Deleting the GL objects above is sufficient cleanup.
     };
-  }, [variant, color, speed]);
+  }, [variant, color, speed, generation]);
 
   const style = fill ? undefined : { width: size, height: size };
 
