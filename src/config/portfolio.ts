@@ -13,8 +13,12 @@ export const personalInfo = {
   availability: 'Open to remote roles worldwide',
   email: 'carturolopezm@gmail.com',
   phone: '+57 301 386 6300',
-  resumeUrl:
-    'https://drive.google.com/file/d/1CUEmCnDOpBAjZ-OxTlj9e1mJm_7TVlkN/view?usp=sharing',
+  // Served from public/cv/. Self-hosted rather than a Google Drive link so the
+  // CV is versioned with the site, needs no sign-in, and cannot go stale
+  // independently. Update the file, not this path.
+  // NOTE: the file must exist at public/cv/arturo-lopez-cv.pdf or these links 404.
+  resumeUrl: '/cv/arturo-lopez-cv.pdf',
+  resumeFilename: 'Arturo-Lopez-CV.pdf',
   social: {
     github: 'https://github.com/arturolopm',
     linkedin: 'https://www.linkedin.com/in/arturo-lopezm/',

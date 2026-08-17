@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
+import { Download } from 'lucide-react';
 import { about, personalInfo } from '@/config/portfolio';
 
 export default function AboutSection() {
@@ -92,18 +93,30 @@ export default function AboutSection() {
               </div>
             </div>
 
-            <div className='flex flex-wrap gap-3'>
+            {/* Two affordances for one file, no JS PDF renderer: `download`
+                saves it, the second link lets the browser's own viewer open it.
+                Native handling beats shipping a pdf.js bundle, and it is the
+                only thing that behaves on mobile. */}
+            <div className='flex flex-wrap items-center gap-3'>
               <a
                 href={personalInfo.resumeUrl}
-                target='_blank'
-                rel='noopener noreferrer'
+                download={personalInfo.resumeFilename}
               >
                 <Button
                   size='lg'
                   className='rounded-sm bg-signal font-medium text-[#17130c] hover:bg-[#f0b25c]'
                 >
+                  <Download className='mr-2 h-4 w-4' />
                   Download CV
                 </Button>
+              </a>
+              <a
+                href={personalInfo.resumeUrl}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='readout text-sm text-dim underline decoration-line underline-offset-4 transition-colors hover:text-signal'
+              >
+                View in browser
               </a>
               <Button
                 onClick={scrollToWork}
