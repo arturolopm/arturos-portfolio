@@ -72,76 +72,76 @@ export interface SkillCategory {
 // engineers who are not AI engineers, so burying it costs screens. The boundary
 // that does not move: integration into product surfaces, never model training.
 const skillCategories: SkillCategory[] = [
-    {
-      name: 'Frontend & Architecture',
-      items: [
-        'React',
-        'Next.js 16 (App Router)',
-        'TypeScript',
-        'Zustand',
-        'TanStack React Query',
-        'React Hook Form + Zod',
-      ],
-    },
-    {
-      name: 'AI & LLM Integration',
-      items: [
-        'LLM / Agent Integration',
-        'Anthropic Claude',
-        'Google ADK Agents',
-        'Gemini',
-        'SSE-Streamed Chat',
-        'Context Management',
-        'Claude Code',
-      ],
-    },
-    {
-      name: 'Platform & Security',
-      items: [
-        'Multi-tenant SaaS',
-        'Granular RBAC',
-        'JWT + OAuth',
-        'Google / Microsoft SSO',
-        'Docker',
-        'AWS (ECR, SQS)',
-      ],
-    },
-    {
-      name: 'Backend & Data',
-      items: ['Node.js', 'MySQL', 'PostgreSQL', 'REST APIs', 'Repository Pattern', 'Firebase'],
-    },
-    {
-      name: 'Performance',
-      items: [
-        'SSR',
-        'Dynamic Imports',
-        'Lazy Loading',
-        'Memoization Strategy',
-        'Core Web Vitals',
-        'Bundle Analysis',
-      ],
-    },
-    {
-      name: 'Quality & Testing',
-      items: [
-        'Vitest',
-        'Jest',
-        'Playwright',
-        'Storybook',
-        'GitHub Actions CI/CD',
-        'Accessibility & SEO',
-      ],
-    },
-    {
-      name: 'Real-Time',
-      items: [
-        'SSE Streaming',
-        'WebSockets',
-        'Live Notifications',
-        'Conversation History',
-        'Optimistic UI',
-      ],
-    },
+  {
+    name: 'Frontend & Architecture',
+    items: [
+      'React',
+      'Next.js 16 (App Router)',
+      'TypeScript',
+      'Zustand',
+      'TanStack React Query',
+      'React Hook Form + Zod',
+    ],
+  },
+  {
+    name: 'AI & LLM Integration',
+    items: [
+      'LLM / Agent Integration',
+      'Anthropic Claude',
+      'Google ADK Agents',
+      'Gemini',
+      'SSE-Streamed Chat',
+      'Context Management',
+      'Claude Code',
+    ],
+  },
+  {
+    name: 'Platform & Security',
+    items: [
+      'Multi-tenant SaaS',
+      'Granular RBAC',
+      'JWT + OAuth',
+      'Google / Microsoft SSO',
+      'Docker',
+      'AWS (ECR, SQS)',
+    ],
+  },
+  {
+    name: 'Backend & Data',
+    items: ['Node.js', 'MySQL', 'PostgreSQL', 'REST APIs', 'Repository Pattern', 'Firebase'],
+  },
+  {
+    name: 'Performance',
+    items: [
+      'SSR',
+      'Dynamic Imports',
+      'Lazy Loading',
+      'Memoization Strategy',
+      'Core Web Vitals',
+      'Bundle Analysis',
+    ],
+  },
+  {
+    name: 'Quality & Testing',
+    items: [
+      'Vitest',
+      'Jest',
+      'Playwright',
+      'Storybook',
+      'GitHub Actions CI/CD',
+      'Accessibility & SEO',
+    ],
+  },
+  {
+    name: 'Real-Time',
+    items: [
+      'SSE Streaming',
+      'WebSockets',
+      'Live Notifications',
+      'Conversation History',
+      'Optimistic UI',
+    ],
+  },
 ];
 
 export const skills = {
@@ -230,7 +230,7 @@ export const projects: Project[] = [
     // do-not-submit-real-data caveat, and is nofollow. See DESIGN.md.
     liveUrl: 'https://gptdev.xerti.com/urosario',
     liveLabel: 'View live demo',
-    liveNote: 'Test environment — please don’t submit real data',
+    liveNote: 'Test environment you can check how it works',
     liveNoFollow: true,
     githubUrl: null,
     tags: [
