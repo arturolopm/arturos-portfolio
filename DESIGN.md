@@ -80,8 +80,18 @@ Behaviour worth knowing:
 - **Reduced motion** — when `prefers-reduced-motion: reduce` is set, it draws a
   single static frame instead of running the animation loop.
 - **No WebGL** — falls back to a quiet static ring rather than an empty hole.
-- **Cleanup** — cancels its RAF, disconnects its `ResizeObserver`, deletes GL
-  objects and calls `WEBGL_lose_context` on unmount.
+- **Cleanup** — cancels its RAF, disconnects its `ResizeObserver`, removes its
+  context listeners and deletes the GL objects.
+- **Never force context loss.** It must not call
+  `WEBGL_lose_context.loseContext()` on unmount. A canvas returns the *same*
+  context object from every `getContext` call and a force-lost context never
+  recovers, so under React StrictMode's dev-only double mount the second setup
+  gets a dead context: every `compileShader` fails and `getShaderInfoLog` returns
+  `null`. This shipped once and only reproduced in `next dev`, never in a
+  production build — if the wave ever disappears in dev again, check here first.
+- **Genuine context loss is handled** — a `webglcontextlost` listener calls
+  `preventDefault()` (without it the browser will not attempt restore) and
+  `webglcontextrestored` bumps a generation counter to re-run setup.
 - `precision highp float` is guarded with `GL_FRAGMENT_PRECISION_HIGH`, since
   `highp` is optional in WebGL1 fragment shaders.
 
@@ -165,13 +175,28 @@ renders a single page in an `<iframe>` and will not scroll it).
 
 To update: replace the PDF, keep the filename, no code change.
 
-### Do not link the Xertiflow deployment
+### The Xertiflow demo link
 
-The only reachable Xertiflow URL is a **client staging environment**
-(`gptdev.xerti.com/<tenant>`), which is why `projects[0].liveUrl` is `null`.
-Do not put it on the site: it is not ours to publicise, it will change or
-disappear without notice, and it should not be indexed. If a public production
-URL or a client-approved case study appears later, link that instead.
+`projects[0].liveUrl` points at `https://gptdev.xerti.com/urosario`. **Arturo
+decided to link it (2026-08-17)** so visitors can actually see the product; the
+earlier guidance here said not to. It is linked, but it is not a normal live-site
+link, and the three safeguards around it are deliberate — keep them:
+
+| Field | Value | Why |
+|---|---|---|
+| `liveLabel` | `View live demo` | Sets the expectation that this is a demo, not the customer's production system. |
+| `liveNote` | `Test environment — please don't submit real data` | It is a real-looking auth page for a real university. Visitors must not type real credentials or personal data into a test system. |
+| `liveNoFollow` | `true` | Renders `rel="nofollow"` so the portfolio does not pass ranking signal to, or help index, a client staging host. |
+
+Why it needs the care: `gptdev.` is a **staging environment**, not production.
+It is not ours, it can change or disappear without notice, and its landing page
+is a working login screen for Universidad del Rosario. Linking it from a public
+page invites strangers and crawlers into a client's test system.
+
+If a public production URL, a recorded walkthrough, or a client-approved case
+study ever exists, prefer that and drop this link. If the staging host goes away,
+set `liveUrl` back to `null` — the entry falls back to "Private / enterprise"
+automatically.
 
 **Named clients.** Arturo confirmed that **Universidad del Rosario** and
 **Universidad de los Andes** may be named as Xertiflow clients, and the copy

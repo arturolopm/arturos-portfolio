@@ -122,17 +122,26 @@ export default function WorkSection() {
                     ))}
                   </div>
 
-                  <div className='flex flex-wrap items-center gap-4'>
+                  <div className='flex flex-wrap items-center gap-x-4 gap-y-2'>
                     {project.liveUrl ? (
-                      <a
-                        href={project.liveUrl}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className='inline-flex items-center gap-2 text-sm text-signal transition-colors hover:text-[#f0b25c]'
-                      >
-                        <ExternalLink className='h-4 w-4' />
-                        Visit site
-                      </a>
+                      <span className='inline-flex flex-wrap items-center gap-x-3 gap-y-1'>
+                        <a
+                          href={project.liveUrl}
+                          target='_blank'
+                          rel={
+                            project.liveNoFollow
+                              ? 'noopener noreferrer nofollow'
+                              : 'noopener noreferrer'
+                          }
+                          className='inline-flex items-center gap-2 text-sm text-signal transition-colors hover:text-[#f0b25c]'
+                        >
+                          <ExternalLink className='h-4 w-4' />
+                          {project.liveLabel ?? 'Visit site'}
+                        </a>
+                        {project.liveNote && (
+                          <span className='text-xs text-faint'>{project.liveNote}</span>
+                        )}
+                      </span>
                     ) : (
                       <span className='inline-flex items-center gap-2 text-sm text-faint'>
                         <Lock className='h-3.5 w-3.5' />

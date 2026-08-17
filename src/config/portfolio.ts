@@ -195,7 +195,28 @@ export const services = [
   },
 ];
 
-export const projects = [
+export interface Project {
+  title: string;
+  description: string;
+  category: string;
+  company: string;
+  period: string;
+  logo: string | null;
+  liveUrl: string | null;
+  githubUrl: string | null;
+  tags: string[];
+  /** Overrides the default "Visit site" label on the live link. */
+  liveLabel?: string;
+  /** Caveat rendered beside the live link, e.g. that it is a test environment. */
+  liveNote?: string;
+  /**
+   * Adds rel="nofollow" to the live link. Use for staging or third-party
+   * environments we do not want to pass ranking signal to or help index.
+   */
+  liveNoFollow?: boolean;
+}
+
+export const projects: Project[] = [
   {
     title: 'Xertiflow — Administrative Workflow Platform',
     description:
@@ -204,9 +225,13 @@ export const projects = [
     company: 'Xertify',
     period: 'Feb 2026 - Present',
     logo: null,
-    // Deliberately not linked: the only reachable deployment is a client
-    // staging environment. See DESIGN.md.
-    liveUrl: null,
+    // Arturo's decision to link this (2026-08-17). It is a client *staging*
+    // environment, not production, so it is labelled as such, carries a
+    // do-not-submit-real-data caveat, and is nofollow. See DESIGN.md.
+    liveUrl: 'https://gptdev.xerti.com/urosario',
+    liveLabel: 'View live demo',
+    liveNote: 'Test environment — please don’t submit real data',
+    liveNoFollow: true,
     githubUrl: null,
     tags: [
       'Next.js 16',
