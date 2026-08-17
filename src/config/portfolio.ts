@@ -225,7 +225,7 @@ export const projects = [
       'Drove frontend architecture and technical decisions for the NFL+ streaming platform on Next.js 15, defining patterns and standards adopted across the team. Led a performance initiative that improved Time to Interactive by 57% through SSR, dynamic imports, lazy loading and memoization strategy. Collaborated on integrating Claude-based automated code review into the CI/CD pipeline, cutting review turnaround by 30%. Established Storybook documentation and testing standards with 100% coverage of new UI components, and mentored engineers on architecture and performance.',
     category: 'Senior Frontend Engineer',
     company: 'Globant · NFL+ account',
-    period: 'May 2025 - Dec 2025',
+    period: 'May 2025 - Jan 2026',
     logo: '/logos/nfl-logo.svg',
     liveUrl: null,
     githubUrl: null,
@@ -334,12 +334,12 @@ export const experience: Role[] = [
     position: 'Semi-Senior Advanced Frontend Engineer → Senior Frontend Software Engineer',
     project: 'Ernst & Young, then NFL+',
     location: 'Medellin, Colombia',
-    period: 'January 2024 - December 2025',
+    period: 'January 2024 - January 2026',
     engagements: [
       {
         position: 'Senior Frontend Software Engineer',
         project: 'NFL+ account',
-        period: 'May 2025 - December 2025',
+        period: 'May 2025 - January 2026',
         highlights: [
           'Drove frontend architecture for the NFL+ streaming platform on Next.js 15',
           'Improved Time to Interactive by 57% through SSR, dynamic imports, lazy loading and memoization',

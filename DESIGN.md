@@ -180,7 +180,7 @@ approval covered these two.
 
 ### Globant is one job, not two
 
-Arturo was at Globant **January 2024 - December 2025 continuously**, promoted
+Arturo was at Globant **January 2024 - January 2026 continuously**, promoted
 from Semi-Senior Advanced on the Ernst & Young account to Senior on the NFL+
 account. The two entries in `projects` are two client engagements inside one
 tenure, which is why:
