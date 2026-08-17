@@ -41,8 +41,10 @@ export default function HeroSection() {
       className='relative flex min-h-screen items-center pt-28 pb-28'
     >
       {/* Waveform sits behind the copy on small screens, beside it on large. */}
+      {/* Ambience, not the subject: kept dim so the copy and the metrics lead.
+          A full-strength waveform made the page read as an AI product. */}
       <div
-        className='pointer-events-none absolute inset-y-0 right-0 w-full opacity-40 lg:w-[52%] lg:opacity-100'
+        className='pointer-events-none absolute inset-y-0 right-0 w-full opacity-20 lg:w-[46%] lg:opacity-60'
         aria-hidden='true'
       >
         <SiriWave

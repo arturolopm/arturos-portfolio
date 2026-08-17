@@ -74,9 +74,14 @@ export default function SkillsSection() {
                 variants={itemVariants}
                 className='border-t border-line pt-5'
               >
-                <h3 className='mb-4 font-display text-base font-semibold text-paper'>
-                  {category.name}
-                </h3>
+                <div className='mb-4'>
+                  <h3 className='font-display text-base font-semibold text-paper'>
+                    {category.name}
+                  </h3>
+                  {category.note && (
+                    <p className='mt-1 text-xs text-faint italic'>{category.note}</p>
+                  )}
+                </div>
                 <ul className='space-y-2'>
                   {category.items.map((item) => (
                     <li

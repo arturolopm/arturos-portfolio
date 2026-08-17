@@ -105,11 +105,39 @@ falls off before it covers a pixel.
 `src/config/portfolio.ts` is the single source of truth. Sections import from
 it; do not hard-code copy in components.
 
-**Positioning rule:** Arturo is a *senior software engineer with hands-on AI
-tool development experience* — not an AI engineer. Copy may describe LLM and
-agent **integration** (Claude, Google ADK, Gemini, SSE streaming). It must not
-claim model training, fine-tuning, or MLOps. Only metrics in
-`skills.metrics` / `skills.highlights` are verified; do not invent figures.
+### Positioning rule (read before editing any copy)
+
+Arturo is a **senior software engineer whose core strength is frontend
+architecture and end-to-end product ownership**, who *additionally* has recent
+hands-on production experience integrating LLMs and agent frameworks. He is not
+an AI engineer, and copy that reads that way is wrong — this was a real
+regression the first version of this site shipped with.
+
+Three concrete rules:
+
+1. **Order encodes emphasis.** React/Next.js/TypeScript architecture, ownership,
+   multi-tenancy and performance come first. AI comes last — last skill
+   category, last service. Do not promote it because it sounds impressive.
+2. **Qualify the AI work as recent.** "Over the past year", "my newest area".
+   The `SkillCategory.note` field exists for exactly this.
+3. **Integration, never modelling.** Claude, Google ADK, Gemini, SSE streaming,
+   agentic product surfaces: fine. Model training, fine-tuning, embeddings
+   pipelines, evaluation harnesses, MLOps: not his experience, do not imply it.
+
+Only figures in `skills.metrics` / `skills.highlights` are verified. Do not
+invent or round them.
+
+### Do not link the Xertiflow deployment
+
+The only reachable Xertiflow URL is a **client staging environment**
+(`gptdev.xerti.com/<tenant>`), which is why `projects[0].liveUrl` is `null`.
+Do not put it on the site: it is not ours to publicise, it will change or
+disappear without notice, and it should not be indexed. If a public production
+URL or a client-approved case study appears later, link that instead.
+
+The tenant visible on that staging landing is a real university client. The
+copy here says "enterprise and university clients" rather than naming them,
+because client-naming permission has not been confirmed.
 
 ## Tailwind source scanning
 

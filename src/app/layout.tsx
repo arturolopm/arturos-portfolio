@@ -24,24 +24,23 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Arturo Lopez - Senior Software Engineer | React, Next.js & AI Products',
+  title: 'Arturo Lopez - Senior Software Engineer | React, Next.js & TypeScript',
   description:
-    'Senior full stack engineer (frontend-focused) with 5+ years building multi-tenant SaaS and AI-powered products. Owns products end to end: 57% Time to Interactive improvement on NFL+, 85% test coverage at Ernst & Young, and the flagship AI assistant at Xertify built on Anthropic Claude, Google ADK agents and Gemini.',
+    'Senior full stack engineer (frontend-focused) with 5+ years in React, Next.js, TypeScript and Node.js. Owns products end to end: multi-tenant SaaS architecture at Xertify, a 57% Time to Interactive improvement on NFL+, and 85% test coverage at Ernst & Young. Recent hands-on production experience integrating LLM and agent frameworks.',
   keywords: [
+    'Senior Software Engineer',
     'Senior Frontend Engineer',
     'Senior Full Stack Engineer',
     'React',
     'Next.js',
     'TypeScript',
     'Node.js',
+    'Frontend Architecture',
     'Multi-tenant SaaS',
-    'LLM Integration',
-    'Anthropic Claude',
-    'Google ADK',
-    'Gemini',
-    'SSE Streaming',
     'RBAC',
     'Performance Optimization',
+    'LLM Integration',
+    'Anthropic Claude',
     'Xertify',
     'Globant',
     'NFL Plus',
@@ -51,7 +50,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Arturo Lopez - Senior Software Engineer',
     description:
-      '5+ years building multi-tenant SaaS and AI-powered products with React, Next.js and TypeScript. Enterprise delivery at Xertify, NFL+ and Ernst & Young.',
+      '5+ years building multi-tenant SaaS products with React, Next.js and TypeScript. Enterprise delivery at Xertify, NFL+ and Ernst & Young.',
     type: 'website',
   },
 };

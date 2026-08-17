@@ -6,9 +6,9 @@ export const personalInfo = {
   name: 'Arturo Lopez',
   title: 'Senior Software Engineer',
   role: 'Senior Full Stack Engineer (Frontend-Focused)',
-  tagline: 'I build AI-powered, multi-tenant SaaS products end to end',
+  tagline: 'I own multi-tenant SaaS products end to end',
   description:
-    'Senior full stack engineer (frontend-focused) with 5+ years building scalable, multi-tenant SaaS platforms and AI-powered products. I lead products end to end — scoping with stakeholders, architecting the solution, and driving delivery — in React, Next.js, TypeScript and Node.js, with hands-on experience integrating LLM agents into production.',
+    "Senior full stack engineer (frontend-focused) with 5+ years in React, Next.js, TypeScript and Node.js. I own products end to end — scoping with stakeholders, architecting the solution, and driving delivery — most recently the entire frontend of a multi-tenant SaaS platform serving enterprise and university clients. Over the past year that work has also involved hands-on LLM and agent integration, which is where I'm deliberately going deeper.",
   location: 'Medellin, Colombia',
   availability: 'Open to remote roles worldwide',
   email: 'carturolopezm@gmail.com',
@@ -25,7 +25,7 @@ export const about = {
   title: 'About me',
   subtitle: 'Senior Full Stack Engineer (Frontend-Focused)',
   description:
-    "Over 5+ years I've gone from building MVPs from scratch to owning the entire frontend of a company's flagship AI product. At Xertify I architected a multi-tenant conversational assistant on Next.js 16 — SSE-streamed chat across Anthropic Claude, Google ADK agents and Gemini, granular per-tenant RBAC, and a dual-token auth flow — and shipped it to enterprise and education clients. Before that, at Globant, I drove frontend architecture for NFL+ and Ernst & Young. I care most about owning the whole problem: scoping it with stakeholders, deciding the architecture, and leaving standards behind that outlast me.",
+    "Over 5+ years I've gone from building MVPs from scratch to owning the entire frontend of a company's flagship platform. At Xertify I architected a multi-tenant SaaS product on Next.js 16 — subdomain tenant isolation, granular per-tenant RBAC, dual-token auth with Microsoft and Google SSO, and a request-intake and case-tracking workflow — and shipped it to enterprise and university clients. Part of that build was an AI assistant layered on top, my first production work integrating LLM and agent frameworks. Before Xertify, at Globant, I drove frontend architecture for NFL+ and Ernst & Young. What I care about most is owning the whole problem: scoping it with stakeholders, deciding the architecture, and leaving standards behind that outlast me.",
   yearsOfExperience: '5+',
   education: {
     degree: 'Bachelor of Business Management',
@@ -54,11 +54,16 @@ export const about = {
   ],
 };
 
-export const skills = {
-  title: 'Skills & Expertise',
-  description:
-    'Senior engineer with deep React/Next.js architecture experience and hands-on production work integrating LLMs and agent frameworks into real products.',
-  categories: [
+export interface SkillCategory {
+  name: string;
+  items: string[];
+  /** Optional qualifier rendered beside the category heading. */
+  note?: string;
+}
+
+// Ordered by depth, strongest first. AI stays last on purpose: it is real
+// production experience, but it is the newest of these, not the foundation.
+const skillCategories: SkillCategory[] = [
     {
       name: 'Frontend & Architecture',
       items: [
@@ -71,21 +76,6 @@ export const skills = {
       ],
     },
     {
-      name: 'AI & Real-Time',
-      items: [
-        'Anthropic Claude',
-        'Google ADK Agents',
-        'Gemini',
-        'LLM / Agent Integration',
-        'SSE Streaming',
-        'WebSockets',
-      ],
-    },
-    {
-      name: 'Backend & Data',
-      items: ['Node.js', 'MySQL', 'PostgreSQL', 'REST APIs', 'Repository Pattern', 'Firebase'],
-    },
-    {
       name: 'Platform & Security',
       items: [
         'Multi-tenant SaaS',
@@ -94,6 +84,21 @@ export const skills = {
         'Google / Microsoft SSO',
         'Docker',
         'AWS (ECR, SQS)',
+      ],
+    },
+    {
+      name: 'Backend & Data',
+      items: ['Node.js', 'MySQL', 'PostgreSQL', 'REST APIs', 'Repository Pattern', 'Firebase'],
+    },
+    {
+      name: 'Performance',
+      items: [
+        'SSR',
+        'Dynamic Imports',
+        'Lazy Loading',
+        'Memoization Strategy',
+        'Core Web Vitals',
+        'Bundle Analysis',
       ],
     },
     {
@@ -108,17 +113,25 @@ export const skills = {
       ],
     },
     {
-      name: 'Performance',
+      name: 'AI Integration & Real-Time',
+      note: 'Recent — production work over the past year',
       items: [
-        'SSR',
-        'Dynamic Imports',
-        'Lazy Loading',
-        'Memoization Strategy',
-        'Core Web Vitals',
+        'LLM / Agent Integration',
+        'Anthropic Claude',
+        'Google ADK Agents',
+        'Gemini',
+        'SSE Streaming',
+        'WebSockets',
         'Claude Code',
       ],
     },
-  ],
+];
+
+export const skills = {
+  title: 'Skills & Expertise',
+  description:
+    'The core is frontend architecture and end-to-end product ownership across React, Next.js and TypeScript. The AI integration work is recent, hands-on, and something I am actively going deeper on — listed last because that is where it honestly sits today.',
+  categories: skillCategories,
   // Verified numbers only. Each maps to a specific role.
   metrics: [
     { value: '5+', label: 'Years shipping production software' },
@@ -138,53 +151,55 @@ export const services = [
   {
     title: 'End-to-End Product Ownership',
     description:
-      "I take products from stakeholder scoping through architecture to delivery. At Xertify I owned the entire frontend of the company's flagship AI product, negotiating scope, timelines and information architecture directly with enterprise and education clients.",
+      "I take products from stakeholder scoping through architecture to delivery. At Xertify I owned the entire frontend of the company's flagship platform, negotiating scope, timelines and information architecture directly with enterprise and university clients.",
     icon: 'Compass',
     links: ['Architecture', 'Scoping', 'Delivery'],
   },
   {
-    title: 'AI Product Engineering',
-    description:
-      'Hands-on production integration of LLMs and agent frameworks into product surfaces: SSE-streamed chat UIs, conversation history and resume-context handling across Anthropic Claude, Google ADK agents and Gemini. Integration and product work, not model training.',
-    icon: 'Sparkles',
-    links: ['Claude', 'Google ADK', 'SSE Streaming'],
-  },
-  {
     title: 'Multi-Tenant SaaS Architecture',
     description:
-      'Subdomain-based tenant routing and isolation, a shared component system serving distinct tenant experiences from one codebase, granular per-tenant RBAC, and dual-token authentication over a repository-pattern data layer.',
+      'Subdomain-based tenant routing and isolation, a shared component system serving distinct tenant experiences from one codebase, granular per-tenant RBAC, and dual-token authentication with Microsoft and Google SSO over a repository-pattern data layer.',
     icon: 'Layers',
-    links: ['Multi-tenancy', 'RBAC', 'Auth'],
+    links: ['Multi-tenancy', 'RBAC', 'SSO'],
   },
   {
     title: 'Performance & Quality Standards',
     description:
-      'Measurable performance work — a 57% Time to Interactive improvement on NFL+ through SSR, dynamic imports, lazy loading and memoization — plus the testing and documentation standards that keep gains from eroding.',
+      'Measurable performance work — a 57% Time to Interactive improvement on NFL+ through SSR, dynamic imports, lazy loading and memoization — plus the testing and documentation standards that keep those gains from eroding.',
     icon: 'Gauge',
     links: ['Core Web Vitals', 'Vitest', 'Playwright'],
+  },
+  {
+    title: 'LLM & Agent Integration',
+    description:
+      'My newest area, and the one I am pushing hardest on. Over the past year I have shipped production LLM features into a real product: SSE-streamed chat, conversation history and resume-context handling across Anthropic Claude, Google ADK agents and Gemini. This is integration and product engineering — not model training or MLOps.',
+    icon: 'Sparkles',
+    links: ['Claude', 'Google ADK', 'SSE Streaming'],
   },
 ];
 
 export const projects = [
   {
-    title: 'Xertiflow AI Assistant',
+    title: 'Xertiflow — Administrative Workflow Platform',
     description:
-      "Led the end-to-end build of Xertify's flagship AI product: a conversational assistant for case management and student/customer service-request intake, delivered to enterprise and education clients. Built on Next.js 16 with an SSE-streamed chat UI, conversation history and resume-context handling across Anthropic Claude, Google ADK agents and Gemini. Architected the multi-tenant frontend with subdomain tenant isolation, granular per-tenant RBAC, and dual-token auth (Firebase + custom JWT) over a repository-pattern MySQL layer.",
+      "Owned the entire frontend of Xertify's flagship platform: a multi-tenant system for submitting, routing and tracking administrative requests, delivered to enterprise and university clients. Architected it on Next.js 16 with subdomain-based tenant isolation and a shared component system serving distinct tenant experiences from one codebase. Built the authentication layer — dual-token auth (Firebase + custom JWT) with Microsoft and Google SSO plus an unauthenticated path for case-status lookup by filing number — and a granular per-tenant RBAC system whose roles and profiles drive live permission gating throughout the app. Also built the request-intake and case-tracking workflows (React Hook Form + Zod), a scheduling and capacity-planning calendar, and an AI assistant layered on top with SSE-streamed chat across Anthropic Claude, Google ADK agents and Gemini.",
     category: 'Senior Full Stack Engineer',
     company: 'Xertify',
     period: 'Feb 2026 - Present',
     logo: null,
+    // Deliberately not linked: the only reachable deployment is a client
+    // staging environment. See DESIGN.md.
     liveUrl: null,
     githubUrl: null,
     tags: [
       'Next.js 16',
-      'Anthropic Claude',
-      'Google ADK',
-      'Gemini',
-      'SSE Streaming',
       'Multi-tenant',
       'RBAC',
+      'SSO',
+      'TypeScript',
+      'MySQL',
       'Docker',
+      'LLM Integration',
     ],
   },
   {
