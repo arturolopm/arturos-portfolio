@@ -29,7 +29,7 @@ export const about = {
   title: 'About me',
   subtitle: 'Senior Full Stack Engineer (Frontend-Focused)',
   description:
-    "Over 5+ years I've gone from building MVPs from scratch to owning the entire frontend of a company's flagship platform. At Xertify I architected a multi-tenant SaaS product on Next.js 16 — subdomain tenant isolation, granular per-tenant RBAC, dual-token auth with Microsoft and Google SSO, and a request-intake and case-tracking workflow — and shipped it to enterprise and university clients. Part of that build was an AI assistant layered on top, my first production work integrating LLM and agent frameworks. Before Xertify, at Globant, I drove frontend architecture for NFL+ and Ernst & Young. What I care about most is owning the whole problem: scoping it with stakeholders, deciding the architecture, and leaving standards behind that outlast me.",
+    "Over 5+ years I've gone from building MVPs from scratch to owning the entire frontend of a company's flagship platform. At Xertify I architected a multi-tenant SaaS product on Next.js 16 — subdomain tenant isolation, granular per-tenant RBAC, dual-token auth with Microsoft and Google SSO, and a request-intake and case-tracking workflow — and shipped it to enterprise and university clients including Universidad del Rosario and Universidad de los Andes. Part of that build was an AI assistant layered on top, my first production work integrating LLM and agent frameworks. Before Xertify I spent two years at Globant, promoted from the Ernst & Young account onto NFL+, driving frontend architecture on both. What I care about most is owning the whole problem: scoping it with stakeholders, deciding the architecture, and leaving standards behind that outlast me.",
   yearsOfExperience: '5+',
   education: {
     degree: 'Bachelor of Business Management',
@@ -186,7 +186,7 @@ export const projects = [
   {
     title: 'Xertiflow — Administrative Workflow Platform',
     description:
-      "Owned the entire frontend of Xertify's flagship platform: a multi-tenant system for submitting, routing and tracking administrative requests, delivered to enterprise and university clients. Architected it on Next.js 16 with subdomain-based tenant isolation and a shared component system serving distinct tenant experiences from one codebase. Built the authentication layer — dual-token auth (Firebase + custom JWT) with Microsoft and Google SSO plus an unauthenticated path for case-status lookup by filing number — and a granular per-tenant RBAC system whose roles and profiles drive live permission gating throughout the app. Also built the request-intake and case-tracking workflows (React Hook Form + Zod), a scheduling and capacity-planning calendar, and an AI assistant layered on top with SSE-streamed chat across Anthropic Claude, Google ADK agents and Gemini.",
+      "Owned the entire frontend of Xertify's flagship platform: a multi-tenant system for submitting, routing and tracking administrative requests, delivered to enterprise and university clients including Universidad del Rosario and Universidad de los Andes. Architected it on Next.js 16 with subdomain-based tenant isolation and a shared component system serving distinct tenant experiences from one codebase. Built the authentication layer — dual-token auth (Firebase + custom JWT) with Microsoft and Google SSO plus an unauthenticated path for case-status lookup by filing number — and a granular per-tenant RBAC system whose roles and profiles drive live permission gating throughout the app. Also built the request-intake and case-tracking workflows (React Hook Form + Zod), a scheduling and capacity-planning calendar, and an AI assistant layered on top with SSE-streamed chat across Anthropic Claude, Google ADK agents and Gemini.",
     category: 'Senior Full Stack Engineer',
     company: 'Xertify',
     period: 'Feb 2026 - Present',
@@ -211,7 +211,7 @@ export const projects = [
     description:
       'Drove frontend architecture and technical decisions for the NFL+ streaming platform on Next.js 15, defining patterns and standards adopted across the team. Led a performance initiative that improved Time to Interactive by 57% through SSR, dynamic imports, lazy loading and memoization strategy. Collaborated on integrating Claude-based automated code review into the CI/CD pipeline, cutting review turnaround by 30%. Established Storybook documentation and testing standards with 100% coverage of new UI components, and mentored engineers on architecture and performance.',
     category: 'Senior Frontend Engineer',
-    company: 'Globant',
+    company: 'Globant · NFL+ account',
     period: 'May 2025 - Dec 2025',
     logo: '/logos/nfl-logo.svg',
     liveUrl: null,
@@ -223,7 +223,7 @@ export const projects = [
     description:
       'Led refactoring of large-scale components in a regression-analysis platform (React, TypeScript), prioritizing performance and accessibility. Drove the tool from a regional Germany-based deployment to global release inside a federated development environment. Achieved 85% unit test coverage with Vitest, personally owning 35% of the suite, and oversaw integration of third-party and external-team components.',
     category: 'Semi-Senior Advanced Frontend Engineer',
-    company: 'Globant',
+    company: 'Globant · Ernst & Young account',
     period: 'Jan 2024 - Apr 2025',
     logo: '/logos/ey-logo.svg',
     liveUrl: null,
@@ -275,7 +275,30 @@ export const contact = {
     "I'm open to senior frontend and full stack roles, remote worldwide, especially where AI is part of the product. If you're hiring or want to talk architecture, my inbox is open.",
 };
 
-export const experience = [
+export interface Engagement {
+  position: string;
+  project: string;
+  period: string;
+  highlights: string[];
+}
+
+export interface Role {
+  company: string;
+  position: string;
+  location: string;
+  period: string;
+  project?: string;
+  /** Flat bullet list, for a single-engagement role. */
+  highlights?: string[];
+  /**
+   * Sub-engagements within one continuous employment. Use this instead of
+   * `highlights` when one employer covered several distinct accounts or
+   * products, so the tenure reads as one job rather than several short ones.
+   */
+  engagements?: Engagement[];
+}
+
+export const experience: Role[] = [
   {
     company: 'Xertify',
     position: 'Senior Full Stack (Frontend Oriented) Software Engineer',
@@ -290,31 +313,39 @@ export const experience = [
       'Shipped multi-stage Docker builds to Amazon ECR via GitHub Actions CI/CD',
     ],
   },
+  // One continuous two-year employment, not two jobs: Arturo was promoted and
+  // moved internally from the Ernst & Young account onto NFL+. Keep it as a
+  // single entry with two engagements so it never reads as short tenures.
   {
     company: 'Globant',
-    position: 'Senior Frontend Software Engineer',
-    project: 'NFL Plus',
+    position: 'Semi-Senior Advanced Frontend Engineer → Senior Frontend Software Engineer',
+    project: 'Ernst & Young, then NFL+',
     location: 'Medellin, Colombia',
-    period: 'May 2025 - December 2025',
-    highlights: [
-      'Drove frontend architecture for the NFL+ streaming platform on Next.js 15',
-      'Improved Time to Interactive by 57% through SSR, dynamic imports, lazy loading and memoization',
-      'Cut PR review turnaround 30% by integrating Claude-based automated review into CI/CD',
-      'Maintained 100% Storybook documentation coverage for new UI components',
-      'Mentored engineers on architecture, performance and code quality',
-    ],
-  },
-  {
-    company: 'Globant',
-    position: 'Semi-Senior Advanced Frontend Engineer',
-    project: 'Ernst & Young',
-    location: 'Medellin, Colombia',
-    period: 'January 2024 - April 2025',
-    highlights: [
-      'Refactored large-scale components prioritizing performance and accessibility',
-      'Achieved 85% unit test coverage with Vitest, personally owning 35% of the suite',
-      'Drove the tool from Germany-based regional deployment to global release',
-      'Integrated the application into a federated development environment',
+    period: 'January 2024 - December 2025',
+    engagements: [
+      {
+        position: 'Senior Frontend Software Engineer',
+        project: 'NFL+ account',
+        period: 'May 2025 - December 2025',
+        highlights: [
+          'Drove frontend architecture for the NFL+ streaming platform on Next.js 15',
+          'Improved Time to Interactive by 57% through SSR, dynamic imports, lazy loading and memoization',
+          'Cut PR review turnaround 30% by integrating Claude-based automated review into CI/CD',
+          'Maintained 100% Storybook documentation coverage for new UI components',
+          'Mentored engineers on architecture, performance and code quality',
+        ],
+      },
+      {
+        position: 'Semi-Senior Advanced Frontend Engineer',
+        project: 'Ernst & Young account',
+        period: 'January 2024 - April 2025',
+        highlights: [
+          'Refactored large-scale components prioritizing performance and accessibility',
+          'Achieved 85% unit test coverage with Vitest, personally owning 35% of the suite',
+          'Drove the tool from Germany-based regional deployment to global release',
+          'Integrated the application into a federated development environment',
+        ],
+      },
     ],
   },
   {

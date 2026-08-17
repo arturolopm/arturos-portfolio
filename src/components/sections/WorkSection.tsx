@@ -49,7 +49,9 @@ export default function WorkSection() {
               <h2 className='mb-4 text-3xl font-bold md:text-4xl'>Selected work</h2>
               <p className='max-w-xl text-base leading-relaxed text-dim'>
                 Reverse chronological. The enterprise projects are under NDA, so the detail here
-                is the architecture and the measured outcome rather than screenshots.
+                is the architecture and the measured outcome rather than screenshots. The two
+                Globant entries are one continuous two-year tenure — I was promoted from the
+                Ernst &amp; Young account onto NFL+.
               </p>
             </div>
             <a

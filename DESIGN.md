@@ -135,9 +135,25 @@ Do not put it on the site: it is not ours to publicise, it will change or
 disappear without notice, and it should not be indexed. If a public production
 URL or a client-approved case study appears later, link that instead.
 
-The tenant visible on that staging landing is a real university client. The
-copy here says "enterprise and university clients" rather than naming them,
-because client-naming permission has not been confirmed.
+**Named clients.** Arturo confirmed that **Universidad del Rosario** and
+**Universidad de los Andes** may be named as Xertiflow clients, and the copy
+does so. Do not add further client names without checking with him first — that
+approval covered these two.
+
+### Globant is one job, not two
+
+Arturo was at Globant **January 2024 - December 2025 continuously**, promoted
+from Semi-Senior Advanced on the Ernst & Young account to Senior on the NFL+
+account. The two entries in `projects` are two client engagements inside one
+tenure, which is why:
+
+- `company` reads `Globant · Ernst & Young account` / `Globant · NFL+ account`
+- the Work section intro states the continuity explicitly
+- `experience` models it as a single `Role` with two `engagements`, not two roles
+
+Never restructure this into two separate employers. Adjacent short entries at
+the same company invite a job-hopping read that the actual history does not
+support, and the promotion is a selling point.
 
 ## Tailwind source scanning
 
