@@ -2,37 +2,40 @@
 
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { personalInfo } from '@/config/portfolio';
 
 export default function Header() {
   const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <motion.header
-      initial={{ y: -100, opacity: 0 }}
+      initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-40 py-6 glass-effect"
+      transition={{ duration: 0.4 }}
+      className='fixed top-0 right-0 left-0 z-40 border-b border-line bg-ink/85 backdrop-blur-sm'
     >
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
-          <a 
-            href="https://www.linkedin.com/in/arturo-lopez-martinez/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-2xl font-bold hover:scale-105 transition-transform"
+      <div className='container mx-auto px-4'>
+        <div className='flex h-16 items-center justify-between'>
+          <button
+            type='button'
+            onClick={scrollToTop}
+            className='font-display text-lg font-bold tracking-tight text-paper transition-colors hover:text-signal'
           >
-            <span className="text-white">Arturo</span>
-            <span className="ml-2 text-gradient">Lopez</span>
-          </a>
-          
-          <Button 
+            Arturo Lopez
+            <span className='readout ml-3 hidden text-xs font-normal text-faint sm:inline'>
+              {personalInfo.title}
+            </span>
+          </button>
+
+          <Button
             onClick={scrollToContact}
-            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+            className='rounded-sm bg-signal font-medium text-[#17130c] hover:bg-[#f0b25c]'
           >
             Work with me
           </Button>
@@ -41,4 +44,3 @@ export default function Header() {
     </motion.header>
   );
 }
-

@@ -2,144 +2,152 @@
 
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Github, Linkedin } from 'lucide-react';
-import { SplineScene } from '@/components/ui/splite';
+import { Github, Linkedin, ArrowDown } from 'lucide-react';
+import { SiriWave } from '@/components/ui/siri-wave';
+import { personalInfo, skills } from '@/config/portfolio';
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3,
+      staggerChildren: 0.12,
+      delayChildren: 0.15,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { y: 50, opacity: 0 },
+  hidden: { y: 24, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
       type: 'spring' as const,
-      stiffness: 100,
+      stiffness: 120,
+      damping: 18,
     },
   },
 };
 
 export default function HeroSection() {
-  const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const scrollToWork = () => {
-    const element = document.getElementById('work');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section
       id='home'
-      className='min-h-screen flex items-center pt-24 pb-32'
+      className='relative flex min-h-screen items-center pt-28 pb-28'
     >
-      <div className='container mx-auto px-4'>
-        <div className='flex flex-col lg:flex-row items-center gap-12 lg:gap-20'>
-          {/* Left Content */}
-          <motion.div
-            variants={containerVariants}
-            initial='hidden'
-            animate='visible'
-            className='flex-1 text-center lg:text-left'
+      {/* Waveform sits behind the copy on small screens, beside it on large. */}
+      {/* Ambience, not the subject: kept dim so the copy and the metrics lead.
+          A full-strength waveform made the page read as an AI product. */}
+      <div
+        className='pointer-events-none absolute inset-y-0 right-0 w-full opacity-20 lg:w-[46%] lg:opacity-60'
+        aria-hidden='true'
+      >
+        <SiriWave
+          variant='wave'
+          fill
+          color='#e9a13b'
+          className='h-full w-full'
+        />
+      </div>
+
+      <div className='relative z-10 container mx-auto px-4'>
+        <motion.div
+          variants={containerVariants}
+          initial='hidden'
+          animate='visible'
+          className='max-w-2xl'
+        >
+          <motion.p
+            variants={itemVariants}
+            className='eyebrow mb-6'
           >
-            <motion.h1
-              variants={itemVariants}
-              className='text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-4'
-            >
-              Arturo <span className='text-gradient'>Lopez</span>
-            </motion.h1>
+            {personalInfo.location} — {personalInfo.availability}
+          </motion.p>
 
-            <motion.div
-              variants={itemVariants}
-              className='text-3xl md:text-4xl lg:text-5xl font-semibold mb-6'
-            >
-              <span className='text-white/80'>I am a </span>
-              <span className='text-gradient'>Senior Frontend Developer</span>
-            </motion.div>
+          <motion.h1
+            variants={itemVariants}
+            className='mb-5 text-5xl leading-[0.95] font-extrabold tracking-tight md:text-7xl'
+          >
+            Arturo Lopez
+          </motion.h1>
 
-            <motion.p
-              variants={itemVariants}
-              className='text-lg text-white/70 mb-8 max-w-lg mx-auto lg:mx-0'
-            >
-              Full Stack Web Developer (Frontend oriented) with 4+ years of experience specializing
-              in React, Next.js, JavaScript, Node and TypeScript. Proven expertise in building
-              scalable web applications, optimizing performance, and implementing best practices.
-            </motion.p>
+          <motion.p
+            variants={itemVariants}
+            className='mb-7 font-display text-2xl leading-tight font-semibold text-signal md:text-3xl'
+          >
+            {personalInfo.role}
+          </motion.p>
 
-            <motion.div
-              variants={itemVariants}
-              className='flex flex-wrap gap-4 justify-center lg:justify-start mb-12'
-            >
-              <Button
-                onClick={scrollToContact}
-                size='lg'
-                className='bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white'
-              >
-                Contact me
-              </Button>
-              <Button
-                onClick={scrollToWork}
-                variant='ghost'
-                size='lg'
-                className='text-gradient hover:bg-white/5'
-              >
-                My Portfolio
-              </Button>
-            </motion.div>
+          <motion.p
+            variants={itemVariants}
+            className='mb-10 max-w-xl text-base leading-relaxed text-dim md:text-lg'
+          >
+            {personalInfo.description}
+          </motion.p>
 
-            <motion.div
-              variants={itemVariants}
-              className='flex gap-6 text-4xl justify-center lg:justify-start'
+          {/* Metric readout: the strongest evidence, above the fold. */}
+          <motion.dl
+            variants={itemVariants}
+            className='mb-10 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-line pt-6 sm:grid-cols-4'
+          >
+            {skills.metrics.map((metric) => (
+              <div key={metric.label}>
+                <dt className='readout text-2xl font-medium text-paper md:text-3xl'>
+                  {metric.value}
+                </dt>
+                <dd className='mt-1 text-xs leading-snug text-faint'>{metric.label}</dd>
+              </div>
+            ))}
+          </motion.dl>
+
+          <motion.div
+            variants={itemVariants}
+            className='flex flex-wrap items-center gap-3'
+          >
+            <Button
+              onClick={() => scrollTo('contact')}
+              size='lg'
+              className='rounded-sm bg-signal font-medium text-[#17130c] hover:bg-[#f0b25c]'
             >
+              Get in touch
+            </Button>
+            <Button
+              onClick={() => scrollTo('work')}
+              variant='ghost'
+              size='lg'
+              className='rounded-sm text-paper hover:bg-raised hover:text-paper'
+            >
+              See the work
+              <ArrowDown className='ml-2 h-4 w-4' />
+            </Button>
+
+            <div className='ml-1 flex items-center gap-1'>
               <a
-                href='https://github.com/arturolopm'
+                href={personalInfo.social.github}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-white/70 hover:text-white transition-colors hover:scale-110 transform duration-200'
+                aria-label='GitHub profile'
+                className='p-2 text-dim transition-colors hover:text-signal'
               >
-                <Github className='w-10 h-10' />
+                <Github className='h-5 w-5' />
               </a>
               <a
-                href='https://www.linkedin.com/in/arturo-lopez-martinez/'
+                href={personalInfo.social.linkedin}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-white/70 hover:text-white transition-colors hover:scale-110 transform duration-200'
+                aria-label='LinkedIn profile'
+                className='p-2 text-dim transition-colors hover:text-signal'
               >
-                <Linkedin className='w-10 h-10' />
+                <Linkedin className='h-5 w-5' />
               </a>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Robot with Spotlight */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className='flex-1 w-full h-[400px] lg:h-[600px] hidden lg:flex items-center justify-center'
-          >
-            <div className='w-full h-full'>
-              <SplineScene
-                scene='https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode'
-                className='w-full h-full'
-              />
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
