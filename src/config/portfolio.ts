@@ -6,9 +6,9 @@ export const personalInfo = {
   name: 'Arturo Lopez',
   title: 'Senior Software Engineer',
   role: 'Senior Full Stack Engineer (Frontend-Focused)',
-  tagline: 'I own multi-tenant SaaS products end to end',
+  tagline: 'I own products end to end — lately, building AI into them',
   description:
-    "Senior full stack engineer (frontend-focused) with 5+ years in React, Next.js, TypeScript and Node.js. I own products end to end — scoping with stakeholders, architecting the solution, and driving delivery — most recently the entire frontend of a multi-tenant SaaS platform serving enterprise and university clients. Over the past year that work has also involved hands-on LLM and agent integration, which is where I'm deliberately going deeper.",
+    "Senior full stack engineer (frontend-focused) with 5+ years in React, Next.js, TypeScript and Node.js, and a track record of owning products end to end. My recent focus has been building AI into production software: I designed and shipped the AI assistant at the core of Xertify's flagship multi-tenant platform — SSE-streamed chat with conversation history and context handling across Anthropic Claude, Google ADK agents and Gemini — for enterprise and university clients.",
   location: 'Medellin, Colombia',
   availability: 'Open to remote roles worldwide',
   email: 'carturolopezm@gmail.com',
@@ -16,9 +16,11 @@ export const personalInfo = {
   // Served from public/cv/. Self-hosted rather than a Google Drive link so the
   // CV is versioned with the site, needs no sign-in, and cannot go stale
   // independently. Update the file, not this path.
-  // NOTE: the file must exist at public/cv/arturo-lopez-cv.pdf or these links 404.
-  resumeUrl: '/cv/arturo-lopez-cv.pdf',
-  resumeFilename: 'Arturo-Lopez-CV.pdf',
+  // Must match the actual filename in public/cv/ exactly, or both links 404.
+  // Note the year in the name: re-exporting as ...-2027.pdf will require editing
+  // this line, so consider a year-less filename next time.
+  resumeUrl: '/cv/Arturo-Lopez-CV-2026.pdf',
+  resumeFilename: 'Arturo-Lopez-CV-2026.pdf',
   social: {
     github: 'https://github.com/arturolopm',
     linkedin: 'https://www.linkedin.com/in/arturo-lopezm/',
@@ -29,7 +31,7 @@ export const about = {
   title: 'About me',
   subtitle: 'Senior Full Stack Engineer (Frontend-Focused)',
   description:
-    "Over 5+ years I've gone from building MVPs from scratch to owning the entire frontend of a company's flagship platform. At Xertify I architected a multi-tenant SaaS product on Next.js 16 — subdomain tenant isolation, granular per-tenant RBAC, dual-token auth with Microsoft and Google SSO, and a request-intake and case-tracking workflow — and shipped it to enterprise and university clients including Universidad del Rosario and Universidad de los Andes. Part of that build was an AI assistant layered on top, my first production work integrating LLM and agent frameworks. Before Xertify I spent two years at Globant, promoted from the Ernst & Young account onto NFL+, driving frontend architecture on both. What I care about most is owning the whole problem: scoping it with stakeholders, deciding the architecture, and leaving standards behind that outlast me.",
+    "Over 5+ years I've gone from building MVPs from scratch to owning the entire frontend of a company's flagship platform. At Xertify I architected a multi-tenant SaaS product on Next.js 16 — subdomain tenant isolation, granular per-tenant RBAC, dual-token auth with Microsoft and Google SSO — and designed and shipped the AI assistant at its core: SSE-streamed chat with conversation history and resume-context handling across three LLM and agent providers, serving Universidad del Rosario, Universidad de los Andes and enterprise clients. Building AI into real products is where my focus has gone lately, and it started before Xertify: at Globant I brought Claude-based automated code review into the CI/CD pipeline and cut review turnaround by 30%. I spent two years there, promoted from the Ernst & Young account onto NFL+. What I care about most is owning the whole problem: scoping it with stakeholders, deciding the architecture, and leaving standards behind that outlast me.",
   yearsOfExperience: '5+',
   education: {
     degree: 'Bachelor of Business Management',
@@ -65,8 +67,10 @@ export interface SkillCategory {
   note?: string;
 }
 
-// Ordered by depth, strongest first. AI stays last on purpose: it is real
-// production experience, but it is the newest of these, not the foundation.
+// Frontend architecture first - that is the identity. AI second, because it is
+// Arturo's current focus and shipping AI features is now expected of senior
+// engineers who are not AI engineers, so burying it costs screens. The boundary
+// that does not move: integration into product surfaces, never model training.
 const skillCategories: SkillCategory[] = [
     {
       name: 'Frontend & Architecture',
@@ -77,6 +81,18 @@ const skillCategories: SkillCategory[] = [
         'Zustand',
         'TanStack React Query',
         'React Hook Form + Zod',
+      ],
+    },
+    {
+      name: 'AI & LLM Integration',
+      items: [
+        'LLM / Agent Integration',
+        'Anthropic Claude',
+        'Google ADK Agents',
+        'Gemini',
+        'SSE-Streamed Chat',
+        'Context Management',
+        'Claude Code',
       ],
     },
     {
@@ -117,16 +133,13 @@ const skillCategories: SkillCategory[] = [
       ],
     },
     {
-      name: 'AI Integration & Real-Time',
-      note: 'Recent — production work over the past year',
+      name: 'Real-Time',
       items: [
-        'LLM / Agent Integration',
-        'Anthropic Claude',
-        'Google ADK Agents',
-        'Gemini',
         'SSE Streaming',
         'WebSockets',
-        'Claude Code',
+        'Live Notifications',
+        'Conversation History',
+        'Optimistic UI',
       ],
     },
 ];
@@ -134,7 +147,7 @@ const skillCategories: SkillCategory[] = [
 export const skills = {
   title: 'Skills & Expertise',
   description:
-    'The core is frontend architecture and end-to-end product ownership across React, Next.js and TypeScript. The AI integration work is recent, hands-on, and something I am actively going deeper on — listed last because that is where it honestly sits today.',
+    'Frontend architecture and end-to-end product ownership across React, Next.js and TypeScript, with production LLM and agent integration as my current focus. Integration into real product surfaces — streaming interfaces, context handling, multi-provider — rather than model training or MLOps.',
   categories: skillCategories,
   // Verified numbers only. Each maps to a specific role.
   metrics: [
@@ -160,6 +173,13 @@ export const services = [
     links: ['Architecture', 'Scoping', 'Delivery'],
   },
   {
+    title: 'LLM & Agent Integration',
+    description:
+      "Shipping AI into production products, which is where my focus has gone lately. I designed and built the AI assistant at the core of Xertify's platform: SSE-streamed chat, conversation history and resume-context handling across three providers — Anthropic Claude, Google ADK agents and Gemini. Earlier, at Globant, I brought Claude-based automated code review into CI/CD and cut review turnaround by 30%. Integration and product engineering, not model training or MLOps.",
+    icon: 'Sparkles',
+    links: ['Claude', 'Google ADK', 'SSE Streaming'],
+  },
+  {
     title: 'Multi-Tenant SaaS Architecture',
     description:
       'Subdomain-based tenant routing and isolation, a shared component system serving distinct tenant experiences from one codebase, granular per-tenant RBAC, and dual-token authentication with Microsoft and Google SSO over a repository-pattern data layer.',
@@ -173,20 +193,13 @@ export const services = [
     icon: 'Gauge',
     links: ['Core Web Vitals', 'Vitest', 'Playwright'],
   },
-  {
-    title: 'LLM & Agent Integration',
-    description:
-      'My newest area, and the one I am pushing hardest on. Over the past year I have shipped production LLM features into a real product: SSE-streamed chat, conversation history and resume-context handling across Anthropic Claude, Google ADK agents and Gemini. This is integration and product engineering — not model training or MLOps.',
-    icon: 'Sparkles',
-    links: ['Claude', 'Google ADK', 'SSE Streaming'],
-  },
 ];
 
 export const projects = [
   {
     title: 'Xertiflow — Administrative Workflow Platform',
     description:
-      "Owned the entire frontend of Xertify's flagship platform: a multi-tenant system for submitting, routing and tracking administrative requests, delivered to enterprise and university clients including Universidad del Rosario and Universidad de los Andes. Architected it on Next.js 16 with subdomain-based tenant isolation and a shared component system serving distinct tenant experiences from one codebase. Built the authentication layer — dual-token auth (Firebase + custom JWT) with Microsoft and Google SSO plus an unauthenticated path for case-status lookup by filing number — and a granular per-tenant RBAC system whose roles and profiles drive live permission gating throughout the app. Also built the request-intake and case-tracking workflows (React Hook Form + Zod), a scheduling and capacity-planning calendar, and an AI assistant layered on top with SSE-streamed chat across Anthropic Claude, Google ADK agents and Gemini.",
+      "Owned the entire frontend of Xertify's flagship platform: a multi-tenant system for submitting, routing and tracking administrative requests, delivered to enterprise and university clients including Universidad del Rosario and Universidad de los Andes. Architected it on Next.js 16 with subdomain-based tenant isolation and a shared component system serving distinct tenant experiences from one codebase. Designed and shipped the platform's AI assistant: a real-time SSE-streamed chat experience with conversation history and resume-context handling, integrated across three LLM and agent providers (Anthropic Claude, Google ADK agents, Gemini), with live notifications over WebSockets. Built the authentication layer — dual-token auth (Firebase + custom JWT) with Microsoft and Google SSO plus an unauthenticated path for case-status lookup by filing number — and a granular per-tenant RBAC system whose roles and profiles drive live permission gating throughout the app. Also built the request-intake and case-tracking workflows (React Hook Form + Zod) and a scheduling and capacity-planning calendar.",
     category: 'Senior Full Stack Engineer',
     company: 'Xertify',
     period: 'Feb 2026 - Present',

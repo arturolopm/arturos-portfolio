@@ -107,25 +107,63 @@ it; do not hard-code copy in components.
 
 ### Positioning rule (read before editing any copy)
 
-Arturo is a **senior software engineer whose core strength is frontend
-architecture and end-to-end product ownership**, who *additionally* has recent
-hands-on production experience integrating LLMs and agent frameworks. He is not
-an AI engineer, and copy that reads that way is wrong — this was a real
-regression the first version of this site shipped with.
+Arturo is a **senior full stack engineer (frontend-focused) whose recent focus is
+building AI into production software.** Both halves of that sentence are load
+bearing, and this site has shipped both failure modes already:
 
-Three concrete rules:
+- **v1 read like an AI engineer's portfolio.** Overclaim. Rejected.
+- **v2 buried AI in a trailing clause** — last skill category, last service, a
+  "recent, going deeper" hedge. Under-claim. Also rejected, and for a concrete
+  reason: shipping AI features is now expected of senior engineers who are *not*
+  AI engineers, so hiding the work costs screens.
 
-1. **Order encodes emphasis.** React/Next.js/TypeScript architecture, ownership,
-   multi-tenancy and performance come first. AI comes last — last skill
-   category, last service. Do not promote it because it sounds impressive.
-2. **Qualify the AI work as recent.** "Over the past year", "my newest area".
-   The `SkillCategory.note` field exists for exactly this.
-3. **Integration, never modelling.** Claude, Google ADK, Gemini, SSE streaming,
-   agentic product surfaces: fine. Model training, fine-tuning, embeddings
-   pipelines, evaluation harnesses, MLOps: not his experience, do not imply it.
+The calibration to hold (v3, current):
+
+1. **Identity is senior full stack engineer.** That is the hero role line, the
+   page title, and the first clause of the summary: React/Next.js/TypeScript
+   depth plus end-to-end ownership. Do not put "AI" in the role line.
+2. **AI is a headline capability, second in order.** Second skill category,
+   second service, its own sentence in the hero summary, an early bolded bullet
+   in the Xertiflow entry. Name the providers and the mechanics — SSE-streamed
+   chat, conversation history, context handling, three providers — because the
+   specifics are what make it credible rather than buzzwordy.
+3. **Integration, never modelling.** Claude, Google ADK, Gemini, streaming
+   interfaces, agentic product surfaces: fine. Model training, fine-tuning,
+   embeddings pipelines, evaluation harnesses, MLOps, Python/PyTorch: not his
+   experience, never imply it. This boundary does not move regardless of emphasis.
+4. **No self-deprecating qualifiers in public copy.** Do not write "first
+   production LLM work" or "still learning" on the site or the CV. True, useful
+   in an interview, wrong on an outward-facing document.
 
 Only figures in `skills.metrics` / `skills.highlights` are verified. Do not
 invent or round them.
+
+The canonical wording lives in the job-search repo at `cv/arturo-lopez-cv.md`.
+Keep this site and that CV saying the same thing.
+
+### The CV file
+
+The CV is self-hosted at `public/cv/Arturo-Lopez-CV-2026.pdf`, and
+`personalInfo.resumeUrl` must match that filename **exactly** or both links 404.
+Note the year in the name: a re-export as `...-2027.pdf` needs this line edited,
+so a year-less filename would be less brittle.
+
+Nothing else belongs in `public/cv/` — everything under `public/` is served, so
+notes kept there get published (this section used to be a `README.md` sitting
+next to the PDF, reachable at `/cv/README.md`).
+
+Self-hosted rather than a Google Drive link because: it is versioned with the
+site so the CV and page copy cannot drift apart the way they already did once;
+there is no sign-in wall or "request access" dead end for a recruiter; and it
+survives the Drive file being moved or re-shared.
+
+**No PDF renderer component, deliberately.** The site links the file and lets the
+browser render it — a `download` button plus a "View in browser" link. Shipping
+`pdf.js` / `react-pdf` would add a few hundred KB to reimplement what every
+browser does natively, and embedded viewers are unreliable on mobile (iOS Safari
+renders a single page in an `<iframe>` and will not scroll it).
+
+To update: replace the PDF, keep the filename, no code change.
 
 ### Do not link the Xertiflow deployment
 
